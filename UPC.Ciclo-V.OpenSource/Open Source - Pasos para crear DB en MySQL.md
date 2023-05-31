@@ -4,7 +4,7 @@
 
 ### Crear Archvio
 
-Ingresar a [Spring Framework](start.spring.io) y usar las siguientes configuraciones:
+Ingresar a [Spring Framework](https://start.spring.io/) y usar las siguientes configuraciones:
 
 - Maven
 - Spring boot 3.1.0
@@ -15,6 +15,11 @@ Ingresar a [Spring Framework](start.spring.io) y usar las siguientes configuraci
   - Sprinf Data JPA
   - MySQL Driver
 - Abrir en IntelliJ
+
+> Tambien puedes descargar un proyecto de ejemplo desde [aqui](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.1.0&packaging=jar&jvmVersion=20&groupId=com.upc&artifactId=demo&name=demo&description=Demo%20project%20for%20Spring%20Boot&packageName=com.upc.demo&dependencies=lombok,web,data-jpa,mysql)
+> Una vez descargado, descomprimir y abrir en IntelliJ
+>
+> > El proyecto tiene las mismas dependencias que se mencionaron anteriormente y tiene de nombre demo y grupo com.upc
 
 ### Crear Carpetas
 
