@@ -1,18 +1,24 @@
 ## Open Source SQL
 
-### Indice {#indice}
+### Indice
 
-1. [Crear Archivo](#1)
-2. [Crear Carpetas](#2)
-3. [Crear Clases e Interfaces](#3)
-   3.1. [Model](#3.1)
-   3.2. [Repository](#3.2)
-   3.3. [Service](#3.3)
-   3.4. [Exception](#3.4)
-   3.5. [Controller](#3.5)
-   3.6. [Application Properties](#3.6)
+1. [Crear Archivo](#crear-archivo)
+2. [Crear Carpetas](#crear-carpetas)
+3. [Crear Clases e Interfaces](#crear-clases-e-interfaces)
 
-### Crear Archvio {#1}
+   3.1. [Model](#model)
+
+   3.2. [Repository](#repository)
+
+   3.3. [Service](#service)
+
+   3.4. [Exception](#exception)
+
+   3.5. [Controller](#controller)
+
+   3.6. [Application Properties](#application-properties)
+
+### Crear Archvio
 
 Ingresar a [Spring Framework](https://start.spring.io/) y usar las siguientes configuraciones:
 
@@ -31,7 +37,7 @@ Ingresar a [Spring Framework](https://start.spring.io/) y usar las siguientes co
 >
 > > El proyecto tiene las mismas dependencias que se mencionaron anteriormente y tiene de nombre demo y grupo com.upc
 
-### Crear Carpetas {#2}
+### Crear Carpetas
 
 Dentro de su proyecto crear la siguiente estructura de carpetas
 
@@ -42,9 +48,9 @@ Dentro de su proyecto crear la siguiente estructura de carpetas
 - service
   - impl
 
-### Crear Clases e Interfaces {#3}
+### Crear Clases e Interfaces
 
-#### Model {#3.1}
+#### Model
 
 Nombre a utilizar:
 
@@ -52,7 +58,7 @@ Nombre a utilizar:
 
 Codigo ejemplo:
 
-```
+```typescript
 package com.upc.Ejercicio.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -95,7 +101,7 @@ public class Loan {
 }
 ```
 
-#### Repository {#3.2}
+#### Repository
 
 Nombre a utilizar:
 
@@ -103,7 +109,7 @@ Nombre a utilizar:
 
 Codigo ejemplo:
 
-```
+```typescript
 package com.upc.Ejercicio.repository;
 
 import com.upc.Ejercicio.model.Book;
@@ -119,7 +125,7 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 }
 ```
 
-#### Service {#3.3}
+#### Service
 
 Se van a crear dos archivos, uno fuera del directorio _impl_ y otro dentro.
 Se tendran los siguientes nombres:
@@ -131,7 +137,7 @@ Codigo ejemplo:
 
 ##### Service Interface
 
-```
+```typescript
 package com.upc.Ejercicio.service;
 
 import com.upc.Ejercicio.model.Book;
@@ -143,7 +149,7 @@ public interface BookService {
 
 ##### Service Impl
 
-```
+```typescript
 package com.upc.Ejercicio.service.impl;
 
 import com.upc.Ejercicio.model.Book;
@@ -164,7 +170,7 @@ public class BookServiceImpl implements BookService {
 }
 ```
 
-#### Exception {#3.4}
+#### Exception
 
 Se van a crear 4 archivos con los siguientes nombres:
 
@@ -177,7 +183,7 @@ Codigo ejemplo:
 
 ##### ControllerExceptionHandler
 
-```
+```typescript
 package com.upc.Ejercicio.exception;
 
 import org.springframework.http.HttpStatus;
@@ -230,7 +236,7 @@ public class ControllerExceptionHandler {
 
 ##### ErrorMessage
 
-```
+```typescript
 package com.upc.Ejercicio.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -255,7 +261,7 @@ public class ErrorMessage {
 
 ##### ResourceNotFoundException
 
-```
+```typescript
 package com.upc.Ejercicio.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
@@ -271,7 +277,7 @@ public class ResourceNotFoundException extends RuntimeException{
 
 ##### ValidationException
 
-```
+```typescript
 package com.upc.Ejercicio.exception;
 
 public class ValidationException extends RuntimeException {
@@ -285,7 +291,7 @@ public class ValidationException extends RuntimeException {
 }
 ```
 
-#### Controller {#3.5}
+#### Controller
 
 En el controller se hara uso de los verbos HTTP GET, POST, PUT y DELETE.
 El nombre del archivo sera:
@@ -294,7 +300,7 @@ El nombre del archivo sera:
 
 Codigo ejemplo:
 
-```
+```typescript
 package com.upc.Ejercicio.controller;
 
 import com.upc.Ejercicio.exception.ValidationException;
@@ -368,11 +374,11 @@ public class BookController {
 }
 ```
 
-#### Application Properties {#3.6}
+#### Application Properties
 
 Ahora se hara la conexion con la base de datos. Antes de realizar el codigo se debe ingresar a **MySQL Workbench** y crear una base datos. Una vez creado, se debe modificar el archivo _application.properties_ con el siguiente codigo:
 
-```
+```properties
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/db_backend?useSSL=false&serverTimezone=UTC
 spring.datasource.username=root
@@ -387,3 +393,5 @@ Lo que debes modificar es en el link db_backend por el nombre de tu base de dato
 ---
 
 [Regresar al inicio](#indice)
+
+//002
