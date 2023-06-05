@@ -1,19 +1,28 @@
 ## Applicaciones Web - DB en MySQL
 
-### Indice {#indice}
+### Indice
 
-1. [Crear Arquitectura de la Solucion](#1)
-2. [Capa Infrastructure](#2)
-   2.1. [Models](#2.1)
-   2.2. [Context](#2.2)
-   2.3. [Infrastructure](#2.3)
-3. [Capa Domain](#3)
-4. [Capa API](#4)
-   4.1. [Inyecciones y Base de datos](#4.1)
-   4.2. [Controladores](#4.2)
+1. [Crear Arquitectura de la Solucion](#1-crear-arquitectura-de-la-solucion)
+
+2. [Capa Infrastructure](#2-capa-infrastructure)
+
+   2.1. [Models](#21-models)
+
+   2.2. [Context](#22-context)
+
+   2.3. [Infrastructure](#23-infrastructure)
+
+3. [Capa Domain](#3-capa-domain)
+
+4. [Capa API](#4-capa-api)
+
+   4.1. [Inyecciones y Base de datos](#41-inyecciones-y-base-de-datos)
+
+   4.2. [Controladores](#42-controladores)
+
 5. [Glossary](#glossary)
 
-### 1. Crear Arquitectura de la Solucion {#1}
+### 1. Crear Arquitectura de la Solucion
 
 En Jetbrians Rider, crear una solucion vacia, _Empty Soluction_.
 Haces click derecho sobre la solucion y seleccionas _Add Project_.
@@ -47,11 +56,11 @@ Por ultimo se debera asegurar de tener los paquetes de NuGet instalados. Para el
   - API
   - Infrastructure
 
-### 2. Capa Infrastructure {#2}
+### 2. Capa Infrastructure
 
 En esta capa se van a crear dos carpetas, una con el nombre de ` models` y otra con el nombre de `context`.
 
-#### 2.1. Models {#2.1}
+#### 2.1. Models
 
 Dentro de `models` se creara las clases de las tablas que se usaran. Aqui esta un ejemplo de como se vera el codigo:
 
@@ -70,7 +79,7 @@ public class User
 }
 ```
 
-#### 2.2. Context {#2.2}
+#### 2.2. Context
 
 Dentro de la carpeta `context` se realiza la conexion con la base de datos y se le agregan restricciones a los datos que quieras. El codigo se vera algo asi:
 
@@ -139,7 +148,7 @@ public class LeadYourWayContext : DbContext
 
 > Nota: Tomar nota de la base de datos que esta llamando en `override void OnConfiguring()`. El nombre de la base de datos es `db_leadyourway_appsweb` y esta en el puerto `3306` con el usuario `root` y la contraseña `1234`. Si usted tiene algun datos distinto cambielo aqui y anotalo porque se usara mas adelante.
 
-#### 2.3. Infrastructure {#2.3}
+#### 2.3. Infrastructure
 
 Fuera de las carpetas `models` y `context` se crearan los archis para poder realizar las funciones de get, save, update & delete. Para ello se crean dos archivos, uno de tipo _Interface_ y otro de tipo _Class_. El archivo de tipo _Interface_ se llamara `IUserInfrastructure` y el de tipo _Class_ se llamara `UserMySQLInfrastructure`.
 El codigo para `IUserInfrastructure` se vera algo asi:
@@ -220,7 +229,7 @@ public class UserMySQLInfrastructure : IUserInfrastructure
 > Nota: Hay una cadena que se empieza a formar y empieza todo en context. De alli en infrastructure se llama a context y el los siguientes pasos se vera como domain llama a infrastructure y como api llama a domain.
 > Ver tambien que Interface esta solo para instanciar los metodos que se usaran en la clase que implementa la interfaz.
 
-### 3. Capa Domain {#3}
+### 3. Capa Domain
 
 En la capa de _Domain_ se sigue una arquitectura similar a los archivos `IUserInfrastructure` y `UserMySQLInfrastructure`. Se crean dos archivos, uno de tipo _Interface_ y otro de tipo _Class_. El archivo de tipo _Interface_ se llamara `IUserDomain` y el de tipo _Class_ se llamara `UserDomain`.
 
@@ -277,9 +286,9 @@ public class UserDomain : IUserDomain
 
 > Nota: Como se observa en el codigo ahora se llama a infrastructure y se le pasa la interfaz que se creo en la capa de _Infrastructure_.
 
-### 4. Capa API {#4}
+### 4. Capa API
 
-#### 4.1. Inyecciones y Base de datos {#4.1}
+#### 4.1. Inyecciones y Base de datos
 
 En esta ultima parte configuraremos los archivos `Program.cs` y `appsettings.json` para que se pueda realizar la conexion a la base de datos y se pueda realizar las peticiones HTTP.
 
@@ -379,7 +388,7 @@ app.Run();
 
 > Nota: Se esta inyectando ambas infraestructuras y domain.
 
-#### 4.2. Controladores {#4.2}
+#### 4.2. Controladores
 
 Para crear u controlador se hace click derecho en la carpeta `Controllers`, esocges `Add` > `Scaffolded Item...`. En la ventana escoges la opcion `API Controller with read/write actions` y le das un nombre. El nombre debe tener el sufijo `Controller`. Ejemplo: `UserController`.
 El codigo se vera algo asi:
@@ -449,10 +458,12 @@ namespace LeadYourWay.API
 }
 ```
 
-### Glossary {#glossary}
+### Glossary
 
 - **Interfaz**: Es un contrato que se debe cumplir. En este caso, la interfaz `IUserInterface` tiene un metodo llamado `GetAllUsers` que debe ser implementado en la clase `UserMySQLInterface`. En el interfaz no se realiza la implementacion del metodo, solo se declara para que quienes lo implementen sepan que deben hacer.
+
 - **Inyeccion de Dependencias**: Es un patron de diseño que permite que una clase dependa de otra clase sin que esta ultima sea instanciada dentro de la primera. En la vida real, en la capa de Infrastructure, sepodria tener uno para SQL otro para Oracle, y asi para las distintas bases de datos. En nuestro `Controller` entonces en vez de instanciar cada una por separado, se inyecta la dependencia de la interfaz y se usa esta para llamar a los metodos que se necesiten. La modificacion que se realizar dentro el archivo `Program.cs` es quien permite asegurar cual implementacion se usara.
+
 - **Workbench DB**: Al momento de crear una base de datos en Workbench, siempre acuerdate y manten segura tu contraseña. Cuando crees una base de datos tienes la opcione de cambiar el `Character Set` y el `Collation`. El `Character Set` es el conjunto de caracteres que se usaran en la base de datos. Si estarass trabajando con varios tipos de caracteres, usa la opcion `Character Set` y selecciona `uft16`, y en `Collation` escoge la opcion `utf16_unicode_ci`. Esto te permitira trabajar con varios tipos de caracteres.
 
 ---
