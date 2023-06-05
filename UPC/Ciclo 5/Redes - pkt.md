@@ -1,6 +1,17 @@
 ## Configuracion de TF Redes
 
-### 1. ISP
+### Indice {#indice}
+
+1. [ISP](#isp)
+2. [Lima](#lima)
+   2.1. [Router Lima](#rtlim1)
+   2.2. [MLS Lima 1](#swlim1)
+   2.3. [MLS Lima 2](#swlim2)
+   2.4. [Switch Normal](#switch)
+3. [Comandos adicionales](#comandos)
+4. [Tablas de mascaras de subred](#mascaras)
+
+### 1. ISP {#isp}
 
 #### 1.1. Configuracion del router ISP
 
@@ -27,9 +38,9 @@ ppp authentication chap
 exit
 ```
 
-### 2. Lima
+### 2. Lima {#lima}
 
-#### 2.1. Configuracion del router Lima
+#### 2.1. Configuracion del router Lima {#rtlim1}
 
 ```
 en
@@ -120,7 +131,7 @@ ppp pap sent-username RTLIM1 password grupo4
 EXIT
 ```
 
-#### 2.2. Configuracion del switch multi-capa 1
+#### 2.2. Configuracion del switch multi-capa 1 {#swlim1}
 
 ```
 en
@@ -270,7 +281,7 @@ passive-interface f0/8
 passive-interface f0/9
 ```
 
-#### 2.3. Configuracion del switch multi-capa 2
+#### 2.3. Configuracion del switch multi-capa 2 {#swlim2}
 
 ```
 en
@@ -339,7 +350,7 @@ ip default-gateway 172.24.99.33
 ip routing
 ```
 
-#### 2.4. Configuracion del switch
+#### 2.4. Configuracion del switch {#switch}
 
 ```
 en
@@ -372,7 +383,7 @@ exit
 ip default-gateway 172.24.99.33
 ```
 
-### 3. Comandos adicionales
+### 3. Comandos adicionales {#comandos}
 
 #### 3.1. Seguridad basica
 
@@ -404,7 +415,7 @@ show ip route
 show interfaces vlan
 ```
 
-### 4. Tablas de mascaras de subred
+### 4. Tablas de mascaras de subred {#mascaras}
 
 | CIDR Notation |    Subnet Mask    | Wildcard Mask |
 | :-----------: | :---------------: | :-----------: |
@@ -415,3 +426,9 @@ show interfaces vlan
 |      /28      | `255.255.255.240` |  `0.0.0.15`   |
 |      /29      | `255.255.255.248` |   `0.0.0.7`   |
 |      /30      | `255.255.255.252` |   `0.0.0.3`   |
+
+---
+
+[Regresar al inicio](#indice)
+
+//002
