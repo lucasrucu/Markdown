@@ -1,17 +1,24 @@
 ## Configuracion de TF Redes
 
-### Indice {#indice}
+### Indice
 
-1. [ISP](#isp)
-2. [Lima](#lima)
-   2.1. [Router Lima](#rtlim1)
-   2.2. [MLS Lima 1](#swlim1)
-   2.3. [MLS Lima 2](#swlim2)
-   2.4. [Switch Normal](#switch)
-3. [Comandos adicionales](#comandos)
-4. [Tablas de mascaras de subred](#mascaras)
+1. [ISP](#1-isp)
 
-### 1. ISP {#isp}
+2. [Lima](#2-lima)
+
+   2.1. [Router Lima](#21-configuracion-del-router-lima)
+
+   2.2. [MLS Lima 1](#22-configuracion-del-switch-multi-capa-1)
+
+   2.3. [MLS Lima 2](#23-configuracion-del-switch-multi-capa-2)
+
+   2.4. [Switch Normal](#24-configuracion-del-switch-normal)
+
+3. [Comandos adicionales](#3-comandos-adicionales)
+
+4. [Tablas de mascaras de subred](#4-tablas-de-mascaras-de-subred)
+
+### 1. ISP
 
 #### 1.1. Configuracion del router ISP
 
@@ -38,11 +45,11 @@ ppp authentication chap
 exit
 ```
 
-### 2. Lima {#lima}
+### 2. Lima
 
-#### 2.1. Configuracion del router Lima {#rtlim1}
+#### 2.1. Configuracion del router Lima
 
-```
+```bash
 en
 conf t
 hostname RTLIM1
@@ -131,9 +138,9 @@ ppp pap sent-username RTLIM1 password grupo4
 EXIT
 ```
 
-#### 2.2. Configuracion del switch multi-capa 1 {#swlim1}
+#### 2.2. Configuracion del switch multi-capa 1
 
-```
+```bash
 en
 conf t
 hostname MLSLIM1
@@ -281,9 +288,9 @@ passive-interface f0/8
 passive-interface f0/9
 ```
 
-#### 2.3. Configuracion del switch multi-capa 2 {#swlim2}
+#### 2.3. Configuracion del switch multi-capa 2
 
-```
+```bash
 en
 conf t
 hostname MLSLIM2
@@ -350,9 +357,9 @@ ip default-gateway 172.24.99.33
 ip routing
 ```
 
-#### 2.4. Configuracion del switch {#switch}
+#### 2.4. Configuracion del switch
 
-```
+```bash
 en
 conf t
 hostname SWLIM9
@@ -383,11 +390,11 @@ exit
 ip default-gateway 172.24.99.33
 ```
 
-### 3. Comandos adicionales {#comandos}
+### 3. Comandos adicionales
 
 #### 3.1. Seguridad basica
 
-```
+```bash
 en
 conf t
 line console 0
@@ -403,7 +410,7 @@ banner motd % *** Solo personal del equipo 4 con la debida autorización, accede
 
 #### 3.2. Configuracion de domain lookup
 
-```
+```bash
 no ip domain-lookup
 ```
 
@@ -415,7 +422,7 @@ show ip route
 show interfaces vlan
 ```
 
-### 4. Tablas de mascaras de subred {#mascaras}
+### 4. Tablas de mascaras de subred
 
 | CIDR Notation |    Subnet Mask    | Wildcard Mask |
 | :-----------: | :---------------: | :-----------: |

@@ -58,7 +58,7 @@ Nombre a utilizar:
 
 Codigo ejemplo:
 
-```typescript
+```java
 package com.upc.Ejercicio.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -109,7 +109,7 @@ Nombre a utilizar:
 
 Codigo ejemplo:
 
-```typescript
+```java
 package com.upc.Ejercicio.repository;
 
 import com.upc.Ejercicio.model.Book;
@@ -137,7 +137,7 @@ Codigo ejemplo:
 
 ##### Service Interface
 
-```typescript
+```java
 package com.upc.Ejercicio.service;
 
 import com.upc.Ejercicio.model.Book;
@@ -149,7 +149,7 @@ public interface BookService {
 
 ##### Service Impl
 
-```typescript
+```java
 package com.upc.Ejercicio.service.impl;
 
 import com.upc.Ejercicio.model.Book;
@@ -183,7 +183,7 @@ Codigo ejemplo:
 
 ##### ControllerExceptionHandler
 
-```typescript
+```java
 package com.upc.Ejercicio.exception;
 
 import org.springframework.http.HttpStatus;
@@ -236,7 +236,7 @@ public class ControllerExceptionHandler {
 
 ##### ErrorMessage
 
-```typescript
+```java
 package com.upc.Ejercicio.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -261,7 +261,7 @@ public class ErrorMessage {
 
 ##### ResourceNotFoundException
 
-```typescript
+```java
 package com.upc.Ejercicio.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
@@ -277,7 +277,7 @@ public class ResourceNotFoundException extends RuntimeException{
 
 ##### ValidationException
 
-```typescript
+```java
 package com.upc.Ejercicio.exception;
 
 public class ValidationException extends RuntimeException {
@@ -300,7 +300,7 @@ El nombre del archivo sera:
 
 Codigo ejemplo:
 
-```typescript
+```java
 package com.upc.Ejercicio.controller;
 
 import com.upc.Ejercicio.exception.ValidationException;

@@ -1,23 +1,23 @@
 ## Open Source Angular
 
-### Indice {#indice}
+### Indice
 
-1. [Crear proyecto](#proyecto)
-2. [Importar librerias](#librerias)
-3. [Crear Material Module](#materialmodule)
-4. [Agregar Imports y Export en _app.module.ts_](#appmodule)
-5. [Crear Componentes](#componentes)
-6. [Crear Servicios](#servicios)
-7. [Crear Modelos](#modelos)
-8. [Extras](#extras)
+1. [Crear proyecto](#1-crear-proyecto)
+2. [Importar librerias](#2-importar-librerias)
+3. [Crear Material Module](#3-crear-material-module)
+4. [Agregar Imports y Export en _app.module.ts_](#4-agregar-imports-y-export-en-appmodulets)
+5. [Crear Componentes](#5-crear-componentes)
+6. [Crear Servicios](#6-crear-servicios)
+7. [Crear Modelos](#7-crear-modelos)
+8. [Extras](#8-extras)
 
-### 1. Crear proyecto {#proyecto}
+### 1. Crear proyecto
 
 > ng new _nombre-proyecto_
 > npm install
 > ng serve
 
-### 2. Importar librerias {#librerias}
+### 2. Importar librerias
 
 - #### Angular
 
@@ -35,25 +35,25 @@
 
 > npm i json-server
 
-### 3. Crear Material Module {#materialmodule}
+### 3. Crear Material Module
 
 Crea una carpeta _shared_ en _src_ y dentro de ella crea un archivo _material.module.ts_ con el siguiente contenido:
 
-```
-import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
+```typescript
+import { NgModule } from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatCardModule } from "@angular/material/card";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [],
@@ -95,16 +95,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export class MaterialModule {}
 ```
 
-### 4. Agregar Imports y Export en _app.module.ts_ {#appmodule}
+### 4. Agregar Imports y Export en _app.module.ts_
 
-```
-import { MaterialModule } from 'src/app/shared/material.module';
-import { HttpClientModule } from '@angular/common/http';
+```typescript
+import { MaterialModule } from "src/app/shared/material.module";
+import { HttpClientModule } from "@angular/common/http";
 ```
 
 Y agregar lo siguiente a la lista de imports:
 
-```
+```typescript
 imports: [
     BrowserModule,
     AppRoutingModule,
@@ -113,7 +113,7 @@ imports: [
 ],
 ```
 
-### 5. Crear Componentes {#componentes}
+### 5. Crear Componentes
 
 - #### Components
 
@@ -123,33 +123,33 @@ imports: [
 
 > ng g c views/_employee-list_
 
-### 6. Crear Servicios {#servicios}
+### 6. Crear Servicios
 
 > ng g s services/_employee_
 
 Codigo del servicio:
 
-```
-import { Injectable } from '@angular/core';
+```typescript
+import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
-} from '@angular/common/http';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+} from "@angular/common/http";
+import { catchError, Observable, retry, throwError } from "rxjs";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class HttpDataService {
-  base_Url = 'http://localhost:3000/api';
+  base_Url = "http://localhost:3000/api";
 
   constructor(private http: HttpClient) {}
 
   //http options
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     }),
   };
 
@@ -168,7 +168,7 @@ export class HttpDataService {
     }
     // Return Observable with Error Message to Client
     return throwError(
-      'Something happened with request, please try again later.'
+      "Something happened with request, please try again later."
     );
   }
 
@@ -186,14 +186,14 @@ export class HttpDataService {
 
   getItem(id: string): Observable<any> {
     return this.http
-      .get<any>(this.base_Url + '/' + id)
+      .get<any>(this.base_Url + "/" + id)
       .pipe(retry(2), catchError(this.handleError));
   }
 
   updateItem(id: string, item: any): Observable<any> {
     return this.http
       .put<any>(
-        this.base_Url + '/' + id,
+        this.base_Url + "/" + id,
         JSON.stringify(item),
         this.httpOptions
       )
@@ -208,13 +208,13 @@ export class HttpDataService {
 }
 ```
 
-### 7. Crear Modelos {#modelos}
+### 7. Crear Modelos
 
 > ng g class models/_employee_ --type=model
 
 Codigo del modelo:
 
-```
+```typescript
 export interface Offers {
   id: any;
   title: any;
@@ -224,7 +224,7 @@ export interface Offers {
 }
 ```
 
-### 8. Extras {#extras}
+### 8. Extras
 
 - #### [Page not found](https://freefrontend.com/html-css-404-page-templates/)
 
@@ -235,7 +235,7 @@ export interface Offers {
 
 Codigo para el html:
 
-```
+```html
 <form (submit)="onSubmit()" #movieForm="ngForm">
   <mat-form-field appearance="outline">
     <mat-label>Movie title</mat-label>
@@ -244,8 +244,7 @@ Codigo para el html:
       placeholder="Input"
       name="title"
       required
-      [(ngModel)]="movieData.title"
-    />
+      [(ngModel)]="movieData.title" />
     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline">
@@ -255,8 +254,7 @@ Codigo para el html:
       placeholder="Input"
       name="rating"
       required
-      [(ngModel)]="movieData.rating"
-    />
+      [(ngModel)]="movieData.rating" />
     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline">
@@ -266,8 +264,7 @@ Codigo para el html:
       placeholder="Input"
       name="year"
       required
-      [(ngModel)]="movieData.year"
-    />
+      [(ngModel)]="movieData.year" />
     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   </mat-form-field>
   <mat-form-field appearance="outline">
@@ -277,8 +274,7 @@ Codigo para el html:
       placeholder="Input"
       name="image"
       required
-      [(ngModel)]="movieData.image"
-    />
+      [(ngModel)]="movieData.image" />
     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   </mat-form-field>
   <ng-container *ngIf="isEditMode; else elseTemplate">
@@ -295,22 +291,22 @@ Codigo para el html:
 
 Codigo para el ts:
 
-```
-import { Component, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MovieService } from 'src/app/service/movie.service';
-import { NgForm } from '@angular/forms';
-import { Movie } from 'src/app/models/movie.model';
-import * as _ from 'lodash';
+```typescript
+import { Component, ViewChild } from "@angular/core";
+import { MatTableDataSource } from "@angular/material/table";
+import { MovieService } from "src/app/service/movie.service";
+import { NgForm } from "@angular/forms";
+import { Movie } from "src/app/models/movie.model";
+import * as _ from "lodash";
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: "app-table",
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.scss"],
 })
 export class TableComponent {
   //Declaramos el formulario
-  @ViewChild('movieForm', { static: false }) movieForm!: NgForm;
+  @ViewChild("movieForm", { static: false }) movieForm!: NgForm;
   dataSource: MatTableDataSource<any>;
 
   //Declaramos el modelo de datos
@@ -339,48 +335,48 @@ Para correr el Json Server existen dos opciones. Ambas opciones se deben correr 
 
 1. Correr el comando
 
-```
+```bash
 json-server --watch db.json
 ```
 
 2. Correr el comando que genera rutas personalizadas
 
-```
+```bash
 json-server --watch db.json --routes routes.json
 ```
 
 El archivo \_db.json tendra un codigo similar a este:
 
-```
+```json
 [
-    {
+  {
+    "id": 1,
+    "title": "The Shawshank Redemption",
+    "rating": 9.3
+  },
+  {
+    "id": 2,
+    "title": "The Godfather",
+    "rating": 9.2,
+    "authors": [
+      {
         "id": 1,
-        "title": "The Shawshank Redemption",
-        "rating": 9.3
-    },
-    {
+        "name": "Mario Puzo"
+      },
+      {
         "id": 2,
-        "title": "The Godfather",
-        "rating": 9.2,
-        "authors": [
-            {
-                "id": 1,
-                "name": "Mario Puzo"
-            },
-            {
-                "id": 2,
-                "name": "Francis Ford Coppola"
-            }
-        ]
-    }
+        "name": "Francis Ford Coppola"
+      }
+    ]
+  }
 ]
 ```
 
 Y el archivo routes.json tendra un codigo similar a este:
 
-```
+```json
 {
-    "/api/*": "/$1"
+  "/api/*": "/$1"
 }
 ```
 
