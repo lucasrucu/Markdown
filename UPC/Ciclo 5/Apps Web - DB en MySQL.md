@@ -79,6 +79,12 @@ public class User
 }
 ```
 
+Adicionalmente se puede crear un modelo con nombre `BaseModel` que tenga los campos de `Id` y `CreatedAt`, que se consideran genericos. De esta manera, todos los modelos que se creen tendran estos dos campos. El codigo se vera algo asi:
+
+```csharp
+
+```
+
 #### 2.2. Context
 
 Dentro de la carpeta `context` se realiza la conexion con la base de datos y se le agregan restricciones a los datos que quieras. El codigo se vera algo asi:

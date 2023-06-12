@@ -1,5 +1,7 @@
 ## Open Source SQL
 
+![Private Investocat](https://octodex.github.com/images/privateinvestocat.jpg)
+
 ### Indice
 
 1. [Crear Archivo](#crear-archivo)
@@ -24,7 +26,7 @@ Ingresar a [Spring Framework](https://start.spring.io/) y usar las siguientes co
 
 - Maven
 - Spring boot 3.1.0
-- Java 20
+- Java 20 `Recomiendo usar el 17`
 - Dependencias:
   - Lombok
   - Spring Web
@@ -54,7 +56,7 @@ Dentro de su proyecto crear la siguiente estructura de carpetas
 
 Nombre a utilizar:
 
-> _modelName_
+> _Account_ o _Transaction_
 
 Codigo ejemplo:
 
@@ -101,11 +103,13 @@ public class Loan {
 }
 ```
 
+> El valor de _name_ en la anotacion _@Table_ sera el nombre de la tabla en la base de datos, y en _@Column_ sera el nombre de la columna en la base de datos.
+
 #### Repository
 
 Nombre a utilizar:
 
-> *modelName*Repository
+> _AccountRepository_ o _TransactionRepository_
 
 Codigo ejemplo:
 
@@ -122,16 +126,23 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
     boolean existsByCodeStudent(String codeStudent);
     boolean existsByCodeStudentAndBookAndBookLoan(String codeStudent, Book book, boolean bookLoan);
     List<Loan> findByCodeStudent(String codeStudent);
+    List<Loan> findByCreateDateBetween (String startDate, String endDate);
 }
 ```
+
+> Los metodos aqui te sirven para filtar los datos u obtener informacion que te sirva despues en el controller. Esto se puede conseguir siguiendo una estructura simial a una query de MySQL o incluso puedes agregar tu propia query con `@Query`
+
+> Los repositorios extienden de JpaRepository, el cual tiene metodos como _save_, _findAll_, _deleteById_, etc. Para mas informacion puedes ingresar a [JpaRepository](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html)
 
 #### Service
 
 Se van a crear dos archivos, uno fuera del directorio _impl_ y otro dentro.
+Los archivos interface tendran los metodos para realizar CRUD y cualquier otro metodo que se halla implementado en el repositorio, mientras que los archivos impl tendran la implementacion de los metodos.
 Se tendran los siguientes nombres:
 
-> *modelName*Service
-> *modelName*ServiceImpl
+> _AccountService_ o _TransactionService_
+
+> _AccountServiceImpl_ o _TransactionServiceImpl_
 
 Codigo ejemplo:
 
@@ -143,32 +154,101 @@ package com.upc.Ejercicio.service;
 import com.upc.Ejercicio.model.Book;
 
 public interface BookService {
-    public abstract Book createBook(Book book);
+    public abstract Book creat(Book book);
+    public abstract Book getById(Long book_id);
+    public abstract List<Book> getAll();
+    public abstract Book update(User book);
+    public abstract void delete(Long book_id);
+    public abstract List<Transaction> getByCreateDateBetween(String startDate, String endDate);
+    public abstract boolean existsByAmountAndBalance(double amount, double balance);
 }
 ```
+
+> Estan los metodos CRUD y tambien los metodos que se implementaron dentro del repositorio
 
 ##### Service Impl
 
 ```java
-package com.upc.Ejercicio.service.impl;
+package com.upc.OpenSourceEjercicio3.service.impl;
 
-import com.upc.Ejercicio.model.Book;
-import com.upc.Ejercicio.repository.BookRepository;
-import com.upc.Ejercicio.service.BookService;
+import com.upc.OpenSourceEjercicio3.exception.ValidationException;
+import com.upc.OpenSourceEjercicio3.model.Transaction;
+import com.upc.OpenSourceEjercicio3.repository.TransactionRepository;
+import com.upc.OpenSourceEjercicio3.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
-public class BookServiceImpl implements BookService {
+public class TransactionServiceImpl  implements TransactionService {
     @Autowired
-    private BookRepository bookRepository;
+    private TransactionRepository transactionRepository;
 
     @Override
-    public Book createBook(Book book) {
-        return bookRepository.save(book);
+    public Transaction create(Transaction transaction) {
+        transaction.setCreateDate(LocalDate.now());
+        if (transaction.getType().equals("Retiro")){
+            transaction.setBalance(transaction.getBalance()-transaction.getAmount());
+        }
+        else {
+            transaction.setBalance(transaction.getBalance()+transaction.getAmount());
+        }
+        validateTransaction(transaction);
+        return transactionRepository.save(transaction);
+    }
+
+    @Override
+    public Transaction getById(Long transaction_id) {
+        return transactionRepository.getByTransactionId(transaction_id);
+    }
+
+    @Override
+    public List<Transaction> getAll() {
+        return transactionRepository.findAll();
+    }
+
+    @Override
+    public Transaction update(Transaction transaction) {
+        return transactionRepository.save(transaction);
+    }
+
+    @Override
+    public void delete(Long transaction_id) {
+        transactionRepository.deleteById(transaction_id);
+    }
+
+    @Override
+    public List<Transaction> getByAccountNameCustomer(String nameCustomer) {
+        return transactionRepository.getByAccount_NameCustomer(nameCustomer);
+    }
+
+    @Override
+    public List<Transaction> getByCreateDateBetween(LocalDate startDate, LocalDate endDate) {
+        return transactionRepository.getByCreateDateBetween(startDate, endDate);
+    }
+
+    private void validateTransaction(Transaction transaction){
+        if (transaction.getType() == null || transaction.getType().isEmpty()){
+            throw new ValidationException("El tipo de transacción bancaria debe ser obligatorio");
+        }
+        if (!(transaction.getType().equals("Retiro")) && !(transaction.getType().equals("Deposito"))){
+            throw new ValidationException("El tipo de transacción bancaria debe ser Retiro o Deposito");
+        }
+        if (transaction.getAmount()<=0){
+            throw new ValidationException("El monto en una transacción bancaria debe ser mayor de S/.0.0");
+        }
+        if (transaction.getAmount()>transaction.getBalance()){
+            throw new ValidationException("En una transacción bancaria tipo retiro el monto no puede ser mayor al saldo");
+        }
     }
 }
 ```
+
+> En la implementacion van los metodos CRUD como `@Override` y los metodos que se crearon en el repositorio. De este modo la interaccion con la base de datos y el controller pasa siempre por el servicio.
+
+> Tomar en cuenta que las reglas de negocio, validaciones y cualquier otro cambio necesario se realiza aqui.
 
 #### Exception
 
@@ -301,77 +381,57 @@ El nombre del archivo sera:
 Codigo ejemplo:
 
 ```java
-package com.upc.Ejercicio.controller;
+package com.upc.OpenSourceEjercicio3.controller;
 
-import com.upc.Ejercicio.exception.ValidationException;
-import com.upc.Ejercicio.model.Book;
-import com.upc.Ejercicio.repository.BookRepository;
-import com.upc.Ejercicio.service.BookService;
+import com.upc.OpenSourceEjercicio3.model.Transaction;
+import com.upc.OpenSourceEjercicio3.service.AccountService;
+import com.upc.OpenSourceEjercicio3.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/library/v1")
-public class BookController {
+@RequestMapping("/api/bank/v1")
+public class TransactionController {
     @Autowired
-    private BookService bookService;
+    private TransactionService transactionService;
 
-    private final BookRepository bookRepository;
+    @Autowired
+    private AccountService accountService;
 
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public TransactionController() {
     }
 
-    // URL: http://localhost:8080/api/library/v1/books
+    // URL: http://localhost:8080/api/bank/v1/transactions/filterByNameCustomer
     // Method: GET
-    @Transactional(readOnly = true)
-    @GetMapping("/books")
-    public ResponseEntity<List<Book>> getAllBooks() {
-        return new ResponseEntity<List<Book>>(bookRepository.findAll(), HttpStatus.OK);
+    @Transactional
+    @RequestMapping("/transactions/filterByNameCustomer")
+    public ResponseEntity<List<Transaction>> filterByNameCustomer(@RequestParam(name = "nameCustomer") String nameCustomer) {
+        return new ResponseEntity<List<Transaction>>(transactionService.getByAccountNameCustomer(nameCustomer), HttpStatus.OK);
     }
 
-    // URL: http://localhost:8080/api/library/v1/books/filterByEditorial
+    // URL: http://localhost:8080/api/bank/v1/transactions/filterByCreateDateRange
     // Method: GET
-    @Transactional(readOnly = true)
-    @GetMapping("/books/filterByEditorial")
-    public ResponseEntity<List<Book>> getAllBooksByEditorial(@RequestParam(name = "editorial") String editorial) {
-        return new ResponseEntity<List<Book>>(bookRepository.findByEditorial(editorial), HttpStatus.OK);
+    @Transactional
+    @RequestMapping("/transactions/filterByCreateDateRange")
+    public ResponseEntity<List<Transaction>> filterByCreateDateRange(@RequestParam(name = "startDate") LocalDate startDate, @RequestParam(name = "endDate") LocalDate endDate) {
+        return new ResponseEntity<List<Transaction>>(transactionService.getByCreateDateBetween(startDate, endDate), HttpStatus.OK);
     }
 
-    // URL: http://localhost:8080/api/library/v1/books
+    // URL: http://localhost:8080/api/bank/v1/accounts/{id}/transactions
     // Method: POST
     @Transactional
-    @PostMapping("/books")
-    public ResponseEntity<Book> createBook(@RequestParam(name = "book") Book book) {
-        return new ResponseEntity<Book>(bookService.createBook(book), HttpStatus.CREATED);
-    }
-
-    private void validateBook(Book book) {
-        if (book.getTitle() == null || book.getTitle().isEmpty()) {
-            throw new ValidationException("El título del libro debe ser obligatorio");
-        }
-        if (book.getTitle().length() > 22) {
-            throw new ValidationException("El título del libro no debe exceder los 22 caracteres");
-        }
-        if (book.getEditorial() == null || book.getEditorial().isEmpty()) {
-            throw new ValidationException("La editorial del libro debe ser obligatorio");
-        }
-        if (book.getEditorial().length() > 14) {
-            throw new ValidationException("La editorial del libro no debe exceder los 14 caracteres");
-        }
-    }
-
-    private void existsBookByTitleAndEditorial (Book book) {
-        if (bookRepository.existsByTitleAndEditorial(book.getTitle(), book.getEditorial())) {
-            throw new ValidationException("No se puede registrar el libro porque existe uno con el mismo titulo y editorial");
-        }
+    @RequestMapping("/accounts/{id}/transactions")
+    public ResponseEntity<Transaction> createTransaction(@PathVariable(value = "id") Long accountId, @RequestBody Transaction transaction) {
+        return new ResponseEntity<Transaction>(transactionService.create(transaction), HttpStatus.CREATED);
     }
 }
+
 ```
 
 #### Application Properties
