@@ -135,7 +135,16 @@ int s0/2/0
 encapsulation ppp
 ppp authentication pap
 ppp pap sent-username RTLIM1 password grupo4
-EXIT
+exit
+
+ip access-list extended LIMA-FILTRO-TELNET
+remark "Filtrar el acceso de TODOS del servicio TELNET, excepto el Administrador"
+permit tcp host 172.24.16.4 any eq telnet
+deny tcp any any eq telnet
+exit
+line vty 0 15
+access-class LIMA-FILTRO-TELNET in
+exit
 ```
 
 #### 2.2. Configuracion del switch multi-capa 1
@@ -286,6 +295,27 @@ passive-interface f0/6
 passive-interface f0/7
 passive-interface f0/8
 passive-interface f0/9
+exit
+
+ip access-list extended LIMA-FILTRO-FTP
+remark "Filtrar el acceso de la VLAN de Marketing del servicio FTP (20, 21), el resto debe pasar"
+deny tcp 172.24.16.192 0.0.0.63 172.24.17.231 0.0.0.0 eq 20
+deny tcp 172.24.16.192 0.0.0.63 172.24.17.231 0.0.0.0 eq 21
+permit ip any any
+exit
+int vlan 30
+ip access-group LIMA-FILTRO-FTP in
+exit
+
+ip access-list extended LIMA-FILTRO-WEB
+remark "Filtrar el acceso de la VLAN de Losgistica del servicio WEB (80, 443), el resto debe pasar"
+deny tcp 172.24.16.128 0.0.0.63 172.24.17.230 0.0.0.0 eq 80
+deny tcp 172.24.16.128 0.0.0.63 172.24.17.230 0.0.0.0 eq 443
+permit ip any any
+exit
+int vlan 20
+ip access-group LIMA-FILTRO-WEB in
+exit
 ```
 
 #### 2.3. Configuracion del switch multi-capa 2
