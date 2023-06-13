@@ -470,7 +470,7 @@ namespace LeadYourWay.API
 
 - **Inyeccion de Dependencias**: Es un patron de diseño que permite que una clase dependa de otra clase sin que esta ultima sea instanciada dentro de la primera. En la vida real, en la capa de Infrastructure, sepodria tener uno para SQL otro para Oracle, y asi para las distintas bases de datos. En nuestro `Controller` entonces en vez de instanciar cada una por separado, se inyecta la dependencia de la interfaz y se usa esta para llamar a los metodos que se necesiten. La modificacion que se realizar dentro el archivo `Program.cs` es quien permite asegurar cual implementacion se usara.
 
-- **Workbench DB**: Al momento de crear una base de datos en Workbench, siempre acuerdate y manten segura tu contraseña. Cuando crees una base de datos tienes la opcione de cambiar el `Character Set` y el `Collation`. El `Character Set` es el conjunto de caracteres que se usaran en la base de datos. Si estarass trabajando con varios tipos de caracteres, usa la opcion `Character Set` y selecciona `uft16`, y en `Collation` escoge la opcion `utf16_unicode_ci`. Esto te permitira trabajar con varios tipos de caracteres.
+- **Workbench DB**: Al momento de crear una base de datos en Workbench, siempre acuerdate y manten segura tu contraseña. Cuando crees una base de datos tienes la opcion de cambiar el `Character Set` y el `Collation`. El `Character Set` es el conjunto de caracteres que se usaran en la base de datos. Si estarass trabajando con varios tipos de caracteres, usa la opcion `Character Set` y selecciona `uft16`, y en `Collation` escoge la opcion `utf16_unicode_ci`. Esto te permitira trabajar con varios tipos de caracteres.
 
 ---
 
