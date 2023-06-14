@@ -4,21 +4,18 @@
 
 ### Indice
 
-1. [Crear Archivo](#crear-archivo)
-2. [Crear Carpetas](#crear-carpetas)
-3. [Crear Clases e Interfaces](#crear-clases-e-interfaces)
-
-   3.1. [Model](#model)
-
-   3.2. [Repository](#repository)
-
-   3.3. [Service](#service)
-
-   3.4. [Exception](#exception)
-
-   3.5. [Controller](#controller)
-
-   3.6. [Application Properties](#application-properties)
+- [Crear Archivo](#crear-archivo)
+- [Crear Carpetas](#crear-carpetas)
+- [Crear Clases e Interfaces](#crear-clases-e-interfaces)
+  - [Model](#model)
+  - [Repository](#repository)
+  - [Service](#service)
+  - [Exception](#exception)
+  - [Controller](#controller)
+  - [Application Properties](#application-properties)
+  - [Dependencias](#dependencias)
+    - [Swagger](#swagger)
+    - [Mapper](#mapper)
 
 ### Crear Archvio
 
@@ -169,8 +166,6 @@ public interface BookService {
 ##### Service Impl
 
 ```java
-package com.upc.OpenSourceEjercicio3.service.impl;
-
 import com.upc.OpenSourceEjercicio3.exception.ValidationException;
 import com.upc.OpenSourceEjercicio3.model.Transaction;
 import com.upc.OpenSourceEjercicio3.repository.TransactionRepository;
@@ -264,8 +259,6 @@ Codigo ejemplo:
 ##### ControllerExceptionHandler
 
 ```java
-package com.upc.Ejercicio.exception;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -317,8 +310,6 @@ public class ControllerExceptionHandler {
 ##### ErrorMessage
 
 ```java
-package com.upc.Ejercicio.exception;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -342,8 +333,6 @@ public class ErrorMessage {
 ##### ResourceNotFoundException
 
 ```java
-package com.upc.Ejercicio.exception;
-
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException() {
         super();
@@ -358,8 +347,6 @@ public class ResourceNotFoundException extends RuntimeException{
 ##### ValidationException
 
 ```java
-package com.upc.Ejercicio.exception;
-
 public class ValidationException extends RuntimeException {
     public ValidationException() {
         super();
@@ -381,8 +368,6 @@ El nombre del archivo sera:
 Codigo ejemplo:
 
 ```java
-package com.upc.OpenSourceEjercicio3.controller;
-
 import com.upc.OpenSourceEjercicio3.model.Transaction;
 import com.upc.OpenSourceEjercicio3.service.AccountService;
 import com.upc.OpenSourceEjercicio3.service.TransactionService;
@@ -444,11 +429,144 @@ spring.datasource.url=jdbc:mysql://localhost:3306/db_backend?useSSL=false&server
 spring.datasource.username=root
 spring.datasource.password=1234
 spring.jpa.hibernate.ddl-auto=update
+
+server.port=8090
+springdoc.swagger-ui.path=/swagger-ui.html
 ```
 
 Lo que debes modificar es en el link db_backend por el nombre de tu base de datos y en el password por el que tengas.
 
 > **Nota:** Si no tienes MySQL Workbench, puedes descargarlo desde [aqui](https://dev.mysql.com/downloads/workbench/)
+
+#### Dependencias
+
+```xml
+<dependencies>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.mysql</groupId>
+		<artifactId>mysql-connector-j</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<optional>true</optional>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-test</artifactId>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springdoc</groupId>
+		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		<version>2.1.0</version>
+	</dependency>
+</dependencies>
+```
+
+#### Swagger
+
+Si implemento el codigo anterior con las dependencias y la configuracion en el _application.properties_, al ejecutar el proyecto y entrar a la siguiente URL:
+
+> http://localhost:8080/swagger-ui/index.html
+
+Se mostrara la documentacion de los servicios que se crearon.
+
+#### Mapper
+
+En el archivo pom.xml actualizas las dependencias y agregas la siguiente dependencia:
+
+```xml
+<dependency>
+	<groupId>org.modelmapper</groupId>
+	<artifactId>modelmapper</artifactId>
+	<version>2.4.4</version>
+</dependency>
+```
+
+En el archivo de tu application tambien debes agregar lo siguiente:
+
+```java
+@SpringBootApplication
+public class EcodriveApplication {
+
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(EcodriveApplication.class, args);
+	}
+
+}
+```
+
+Creas el modelo al que deseas mappear dentro de una carpeta nueva llamada `dto`, y al archivo le pones el nombre de la entidad a la que deseas mapearle.
+
+> Ejemplo: UserDto
+
+```java
+import lombok.Data;
+
+@Data
+public class Response {
+    private Long driverId;
+    private Float value;
+}
+```
+
+Y esto lo puedes implementar dentro de tu servicio de la siguiente manera:
+
+```java
+@Override
+public Response getScoreScope(Long driverId, Integer scope) {
+    validateScope(scope);
+    existsDriver(driverId);
+    Score score = new Score();
+    score.setDriverId(driverId);
+    if (scope == 0) {
+        score.setValue(scoreRepository.findAverageScoreByDriverI(driverId));
+    } else {
+        score.setValue(scoreRepository.findMaxScoreByDriverI(driverId));
+    }
+    return modelMapper.map(score, Response.class);
+}
+```
+
+La ultima linea solo realiza el mapeo, pero recuerda que debes inicializar el modelMapper en el constructor de tu servicio.
+Una ultima cosa, es caso tu mapeo incluye alguna relacion de 1 a muchos y no se muestra aquella lista, en el mismo metodo donde realizas el mapeo debes agregar lo siguiente:
+
+```java
+@Override
+public Response getScoreScope(Long driverId, Integer scope) {
+    modelMapper.getConfiguration().setMatchingStrateg(MatchingStrategies.LOOSE);
+    validateScope(scope);
+    existsDriver(driverId);
+    Score score = new Score();
+    score.setDriverId(driverId);
+    if (scope == 0) {
+        score.setValue(scoreRepository.findAverageScoreByDriverI(driverId));
+    } else {
+        score.setValue(scoreRepository.findMaxScoreByDriverI(driverId));
+    }
+    return modelMapper.map(score, Response.class);
+}
+```
 
 ---
 
