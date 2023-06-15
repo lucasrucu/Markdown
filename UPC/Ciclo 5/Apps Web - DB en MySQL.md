@@ -58,7 +58,9 @@ Por ultimo se debera asegurar de tener los paquetes de NuGet instalados. Para el
 
 ### 2. Capa Infrastructure
 
-En esta capa se van a crear dos carpetas, una con el nombre de ` models` y otra con el nombre de `context`.
+En esta capa se van a crear dos carpetas, una con el nombre de `Models`, `Infrastructure` y otra con el nombre de `Context`.
+
+![img](/Assets/Images/db_architecture.infrastructure.png)
 
 #### 2.1. Models
 
@@ -82,7 +84,16 @@ public class User
 Adicionalmente se puede crear un modelo con nombre `BaseModel` que tenga los campos de `Id` y `CreatedAt`, que se consideran genericos. De esta manera, todos los modelos que se creen tendran estos dos campos. El codigo se vera algo asi:
 
 ```csharp
+namespace LearningCenter.Infraestructure.Models;
 
+public class BaseModel
+{
+    public int Id { get; set; }
+    public bool IsActive { get; set; }
+
+    public DateTime DateCreated { get; set; }
+    public DateTime? DateUpdated { get; set; }
+}
 ```
 
 #### 2.2. Context
@@ -350,7 +361,6 @@ builder.Services.AddScoped<IBicycleDomain, BicycleDomain>();
 
 // MySQL Connection
 var connectionString = builder.Configuration.GetConnectionString("LeadYourWayConnection");
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 
 builder.Services.AddDbContext<LeadYourWayContext>(
     dbContextOptions =>
@@ -459,6 +469,129 @@ namespace LeadYourWay.API
         public void Delete(int id)
         {
             _userDomain.delete(id);
+        }
+    }
+}
+```
+
+### Mapper
+
+Para el mapper se deben realizar los siguientes pasos, instalar los NuGets necesarios, crear las carpetas y los archivos necesarios (sea para response y/o input) y configurar en el archivo `Program.cs` para que se pueda usar el mapper dentro el controller. Empezemos con las instalaciones de NuGet.
+
+#### Instalacion de NuGet
+
+- AutoMapper
+  - API
+- AutoMapper.Extensions.Microsoft.DependencyInjection
+  - API
+
+#### Creacion de carpetas y archivos
+
+Crear las siguientes carpetas
+
+![img](/Assets/Images/db_architecture.mapper.png)
+
+Dentro de Input y Response se crean classes solo con los datos que quieres pedir y mostrar, ejemplo:
+
+```csharp
+namespace failed.API.Response;
+
+public class PlanResponse
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int maxUsers { get; set; }
+}
+```
+
+Dentro de Mapper creas los archivos `ModelToResponse` y `InputToModel`. El codigo para `ModelToResponse` se vera algo asi:
+
+```csharp
+using AutoMapper;
+using failed.API.Response;
+using si730pc2u202110085.Infrastructure.Models;
+
+namespace failed.API.Mapper;
+
+public class ModelToResponse : Profile
+{
+    public ModelToResponse()
+    {
+        CreateMap<Plan, PlanResponse>();
+    }
+}
+```
+
+Y el codigo para `InputToModel` se vera algo asi:
+
+```csharp
+using AutoMapper;
+using failed.API.Input;
+using Microsoft.AspNetCore.Http.HttpResults;
+using si730pc2u202110085.Infrastructure.Models;
+
+namespace failed.API.Mapper;
+
+public class InputToModel : Profile
+{
+    public InputToModel()
+    {
+        CreateMap<PlanInput, Plan>();
+    }
+}
+```
+
+#### Configuracion en Program.cs
+
+Ahora tienes que agregar a tu archivo `Program.cs` las siguientes lineas de codigo antes del app.Build():
+
+```csharp
+builder.Services.AddAutoMapper(
+    typeof(ModelToResponse),
+    typeof(InputToModel)
+);
+```
+
+#### Uso en el Controller
+
+Por ultimo se inyecta el mapper en el controller y para ello dejo un ejemplo de como se veria el codigo:
+
+```csharp
+namespace si730pc2.API.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class PlanController : ControllerBase
+    {
+        // Inject IPlanDomain
+        IPlanDomain _planDomain;
+        IMapper _mapper;
+
+        public PlanController(IPlanDomain planDomain, IMapper mapper)
+        {
+            _planDomain = planDomain;
+            _mapper = mapper;
+        }
+
+        // POST: api/Plan
+        [HttpPost]
+        public ActionResult<PlanResponse> Post([FromBody] PlanInput planInput)
+        {
+            Plan plan = _mapper.Map<PlanInput, Plan>(planInput);
+            try
+            {
+                _planDomain.Create(plan);
+                PlanResponse planResponse = _mapper.Map<Plan, PlanResponse>(plan);
+                return Created("", planResponse);
+            }
+            catch (PlanValidationException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error al procesar");
+            }
         }
     }
 }
