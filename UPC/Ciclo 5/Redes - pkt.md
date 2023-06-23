@@ -2,25 +2,30 @@
 
 ### Indice
 
-1. [ISP](#1-isp)
+- [Configuracion de TF Redes](#configuracion-de-tf-redes)
+  - [Indice](#indice)
+  - [ISP](#isp)
+    - [Configuracion del router ISP](#configuracion-del-router-isp)
+  - [Lima](#lima)
+    - [Configuracion del router Lima](#configuracion-del-router-lima)
+    - [Configuracion del switch multi-capa 1](#configuracion-del-switch-multi-capa-1)
+    - [Configuracion del switch multi-capa 2](#configuracion-del-switch-multi-capa-2)
+    - [Configuracion del switch](#configuracion-del-switch)
+  - [Comandos Por Separado](#comandos-por-separado)
+    - [Seguridad basica](#seguridad-basica)
+    - [Vlan](#vlan)
+    - [DHCP](#dhcp)
+    - [Ospf](#ospf)
+    - [Autenticacion PPP](#autenticacion-ppp)
+    - [Politicas de seguridad](#politicas-de-seguridad)
+    - [Seguridad SSH](#seguridad-ssh)
+    - [Configuracion de domain lookup](#configuracion-de-domain-lookup)
+    - [Comandos de verificacion](#comandos-de-verificacion)
+  - [Tablas de mascaras de subred](#tablas-de-mascaras-de-subred)
 
-2. [Lima](#2-lima)
+### ISP
 
-   2.1. [Router Lima](#21-configuracion-del-router-lima)
-
-   2.2. [MLS Lima 1](#22-configuracion-del-switch-multi-capa-1)
-
-   2.3. [MLS Lima 2](#23-configuracion-del-switch-multi-capa-2)
-
-   2.4. [Switch Normal](#24-configuracion-del-switch-normal)
-
-3. [Comandos adicionales](#3-comandos-adicionales)
-
-4. [Tablas de mascaras de subred](#4-tablas-de-mascaras-de-subred)
-
-### 1. ISP
-
-#### 1.1. Configuracion del router ISP
+#### Configuracion del router ISP
 
 ```
 en
@@ -45,11 +50,11 @@ ppp authentication chap
 exit
 ```
 
-### 2. Lima
+### Lima
 
-#### 2.1. Configuracion del router Lima
+#### Configuracion del router Lima
 
-```bash
+```cmd
 en
 conf t
 hostname RTLIM1
@@ -147,9 +152,9 @@ access-class LIMA-FILTRO-TELNET in
 exit
 ```
 
-#### 2.2. Configuracion del switch multi-capa 1
+#### Configuracion del switch multi-capa 1
 
-```bash
+```cmd
 en
 conf t
 hostname MLSLIM1
@@ -318,9 +323,9 @@ ip access-group LIMA-FILTRO-WEB in
 exit
 ```
 
-#### 2.3. Configuracion del switch multi-capa 2
+#### Configuracion del switch multi-capa 2
 
-```bash
+```cmd
 en
 conf t
 hostname MLSLIM2
@@ -387,9 +392,9 @@ ip default-gateway 172.24.99.33
 ip routing
 ```
 
-#### 2.4. Configuracion del switch
+#### Configuracion del switch
 
-```bash
+```cmd
 en
 conf t
 hostname SWLIM9
@@ -420,13 +425,11 @@ exit
 ip default-gateway 172.24.99.33
 ```
 
-### 3. Comandos adicionales
+### Comandos Por Separado
 
-#### 3.1. Seguridad basica
+#### Seguridad basica
 
-```bash
-en
-conf t
+```cmd
 line console 0
 password grupo4
 login
@@ -438,21 +441,210 @@ enable secret grupo4
 banner motd % *** Solo personal del equipo 4 con la debida autorización, accedera al dispositivo *** %
 ```
 
-#### 3.2. Configuracion de domain lookup
+#### Vlan
 
-```bash
+Configuracion en el switch multi-capa 1
+
+```cmd
+vlan 10
+name ADMINISTRACION
+vlan 20
+name LOGISTICA
+vlan 99
+name NATIVA
+exit
+
+int range f0/2-9
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+int vlan 10
+ip add 172.24.16.1 255.255.255.128
+no shutdown
+int vlan 20
+ip add 172.24.16.129 255.255.255.192
+no shutdown
+int vlan 99
+ip add 172.24.99.33 255.255.255.224
+no shutdown
+exit
+
+ip default-gateway 172.24.99.33
+ip routing
+```
+
+Configuracion en el switch
+
+```cmd
+vlan 10
+name ADMINISTRACION
+vlan 20
+name LOGISTICA
+vlan 99
+name NATIVA
+
+int vlan 99
+ip add 172.24.99.50 255.255.255.224
+no shutdown
+exit
+ip default-gateway 172.24.99.33
+```
+
+#### DHCP
+
+Configuracion en el switch multi-capa 1
+
+```cmd
+ip dhcp pool pool-vlan10
+network 172.24.16.0 255.255.255.128
+default-router 172.24.16.1
+dns-server 172.24.17.230
+domain-name NETWORKPIONEERS.LIMA.COM
+exit
+ip dhcp pool pool-vlan20
+network 172.24.16.128 255.255.255.192
+default-router 172.24.16.129
+dns-server 172.24.17.230
+domain-name NETWORKPIONEERS.LIMA.COM
+exit
+```
+
+#### Ospf
+
+Configuracion en el router
+
+```cmd
+router ospf 100
+router-id 1.1.1.1
+network 100.50.50.0 0.0.0.3 area 0
+network 172.24.254.4 0.0.0.3 area 0
+pasive-interface s0/0/0
+default-information originate
+exit
+```
+
+Configuracion en el switch multi-capa
+
+```cmd
+int vlan 10
+ip ospf 100 area 0
+int vlan 20
+ip ospf 100 area 0
+
+router ospf 100
+network 172.24.16.0 0.0.0.127 area 0
+network 172.24.16.128 0.0.0.63 area 0
+
+passive-interface f0/8
+passive-interface f0/9
+exit
+```
+
+#### Autenticacion PPP
+
+Configuracion en el router
+
+```cmd
+username RTPIU1 secret grupo4
+
+int s0/0/1
+encapsulation ppp
+ppp authentication pap
+ppp pap sent-username RTLIM1 password grupo4
+```
+
+> La primera linea es el usuario con el que se va a autenticar el router remoto. En el router remoto, se realiza la misma configuracion, pero intercambiando los nombres de usuario.
+
+#### Politicas de seguridad
+
+Denegar acceso al servicio telnet a todos los usuarios, excepto al administrador
+
+```cmd
+ip access-list extended LIMA-FILTRO-TELNET
+remark "Filtrar el acceso de TODOS del servicio TELNET, excepto el Administrador"
+permit tcp host 172.24.16.4 any eq telnet
+deny tcp any any eq telnet
+exit
+line vty 0 15
+access-class LIMA-FILTRO-TELNET in
+exit
+```
+
+Denegar el acceso al servicio FTP a la VLAN de Marketing
+
+```cmd
+ip access-list extended LIMA-FILTRO-FTP
+remark "Filtrar el acceso de la VLAN de Marketing del servicio FTP (20, 21), el resto debe pasar"
+deny tcp 172.24.16.192 0.0.0.63 172.24.17.231 0.0.0.0 eq 20
+deny tcp 172.24.16.192 0.0.0.63 172.24.17.231 0.0.0.0 eq 21
+permit ip any any
+exit
+int vlan 30
+ip access-group LIMA-FILTRO-FTP in
+exit
+```
+
+Denegar el acceso al servicio WEB a la VLAN de Logistica
+
+```cmd
+ip access-list extended LIMA-FILTRO-WEB
+remark "Filtrar el acceso de la VLAN de Losgistica del servicio WEB (80, 443), el resto debe pasar"
+deny tcp 172.24.16.128 0.0.0.63 172.24.17.230 0.0.0.0 eq 80
+deny tcp 172.24.16.128 0.0.0.63 172.24.17.230 0.0.0.0 eq 443
+permit ip any any
+exit
+int vlan 20
+ip access-group LIMA-FILTRO-WEB in
+exit
+```
+
+#### Seguridad SSH
+
+```cmd
+username AdminLima secret grupo4
+enable secret grupo4
+ip domain-name NETWORKPIONEERS.LIMA.COM
+ip ssh authentication-retries 3
+ip ssh time-out 90
+crypto key generate rsa
+1024
+ip ssh version 2
+line vty 0 14
+transport input all 
+login local
+exit
+line console 0
+login local
+do copy run start
+exit
+access-list 1 permit host 172.24.16.4
+line vty 0 15
+access-class 1 in
+exit
+```
+
+Para acceder se ingresa al CMD y se escribe el comando `ssh -l AdminLima 172.24.254.21`
+
+#### Configuracion de domain lookup
+
+```cmd
 no ip domain-lookup
 ```
 
-#### 3.3. Comandos de verificacion
+#### Comandos de verificacion
 
-```
+```cmd
 show ip interface brief
 show ip route
 show interfaces vlan
+do show run
+do show history
+do copy run start
 ```
 
-### 4. Tablas de mascaras de subred
+### Tablas de mascaras de subred
 
 | CIDR Notation |    Subnet Mask    | Wildcard Mask |
 | :-----------: | :---------------: | :-----------: |
