@@ -1,7 +1,5 @@
 ## Open Source SQL
 
-![Private Investocat](https://octodex.github.com/images/privateinvestocat.jpg)
-
 ### Indice
 
 - [Crear Archivo](#crear-archivo)
