@@ -2,17 +2,26 @@
 
 ### Indice
 
-- [Crear Archivo](#crear-archivo)
-- [Crear Carpetas](#crear-carpetas)
-- [Crear Clases e Interfaces](#crear-clases-e-interfaces)
-  - [Model](#model)
-  - [Repository](#repository)
-  - [Service](#service)
-  - [Exception](#exception)
-  - [Controller](#controller)
-  - [Application Properties](#application-properties)
-  - [Dependencias](#dependencias)
+- [Open Source SQL](#open-source-sql)
+  - [Indice](#indice)
+  - [Crear Archvio](#crear-archvio)
+  - [Crear Carpetas](#crear-carpetas)
+  - [Crear Clases e Interfaces](#crear-clases-e-interfaces)
+    - [Model](#model)
+    - [Repository](#repository)
+    - [Service](#service)
+      - [Service Interface](#service-interface)
+      - [Service Impl](#service-impl)
+    - [Exception](#exception)
+      - [ControllerExceptionHandler](#controllerexceptionhandler)
+      - [ErrorMessage](#errormessage)
+      - [ResourceNotFoundException](#resourcenotfoundexception)
+      - [ValidationException](#validationexception)
+    - [Controller](#controller)
+    - [Application Properties](#application-properties)
+    - [Dependencias](#dependencias)
     - [Swagger](#swagger)
+    - [Security](#security)
     - [Mapper](#mapper)
 
 ### Crear Archvio
@@ -29,7 +38,7 @@ Ingresar a [Spring Framework](https://start.spring.io/) y usar las siguientes co
   - MySQL Driver
 - Abrir en IntelliJ
 
-> Tambien puedes descargar un proyecto de ejemplo desde [aqui](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.1.0&packaging=jar&jvmVersion=20&groupId=com.upc&artifactId=demo&name=demo&description=Demo%20project%20for%20Spring%20Boot&packageName=com.upc.demo&dependencies=lombok,web,data-jpa,mysql)
+> Tambien puedes descargar un proyecto de ejemplo desde [aqui](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.1.1&packaging=jar&jvmVersion=20&groupId=com.upc&artifactId=demo&name=demo&description=Demo%20project%20for%20Spring%20Boot&packageName=com.upc.demo&dependencies=lombok,web,data-jpa,mysql,security,postgresql)
 > Una vez descargado, descomprimir y abrir en IntelliJ
 >
 > > El proyecto tiene las mismas dependencias que se mencionaron anteriormente y tiene de nombre demo y grupo com.upc
@@ -38,7 +47,9 @@ Ingresar a [Spring Framework](https://start.spring.io/) y usar las siguientes co
 
 Dentro de su proyecto crear la siguiente estructura de carpetas
 
+- config
 - controller
+- -dto
 - exception
 - model
 - repository
@@ -468,11 +479,6 @@ Lo que debes modificar es en el link db_backend por el nombre de tu base de dato
 		<artifactId>spring-boot-starter-test</artifactId>
 		<scope>test</scope>
 	</dependency>
-	<dependency>
-		<groupId>org.springdoc</groupId>
-		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-		<version>2.1.0</version>
-	</dependency>
 </dependencies>
 ```
 
@@ -483,6 +489,31 @@ Si implemento el codigo anterior con las dependencias y la configuracion en el _
 > http://localhost:8080/swagger-ui/index.html
 
 Se mostrara la documentacion de los servicios que se crearon.
+
+```xml
+<dependency>
+	<groupId>org.springdoc</groupId>
+	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	<version>2.1.0</version>
+</dependency>
+```
+
+#### Security
+
+Se instala la siguiente dependencia y se agrega la configuracion en el application.properties
+
+```xml
+<dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-test</artifactId>
+	<scope>test</scope>
+</dependency>
+```
+
+```properties
+spring.security.user.name=admin
+spring.security.user.password=admin
+```
 
 #### Mapper
 
