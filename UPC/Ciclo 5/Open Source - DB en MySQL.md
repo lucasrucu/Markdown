@@ -22,6 +22,7 @@
     - [Dependencias](#dependencias)
     - [Swagger](#swagger)
     - [Security](#security)
+    - [Cors](#cors)
     - [Mapper](#mapper)
 
 ### Crear Archvio
@@ -49,7 +50,7 @@ Dentro de su proyecto crear la siguiente estructura de carpetas
 
 - config
 - controller
-- -dto
+- dto
 - exception
 - model
 - repository
@@ -513,6 +514,33 @@ Se instala la siguiente dependencia y se agrega la configuracion en el applicati
 ```properties
 spring.security.user.name=admin
 spring.security.user.password=admin
+```
+
+#### Cors
+
+Crear una carpeta con nombre config y dentro un archivo con nombre CorsConfig
+
+```java
+@Configuration
+public class CorsConfig{
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/*")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
+
+            }
+        };
+    }
+
+}
+
+
 ```
 
 #### Mapper
