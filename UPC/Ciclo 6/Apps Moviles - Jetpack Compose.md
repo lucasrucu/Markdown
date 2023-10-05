@@ -144,7 +144,7 @@ interface PokemonService {
     @GET("pokemon/{id}")
     fun getPokemon(@Path("id") id: Int) : Call<PokemonDetail>
 
-    @GET(pokemon/)
+    @GET(".")
     fun getDetail(@Query("page") pokemonUrl: String): Call<PokemonDetail>
 }
 ```
