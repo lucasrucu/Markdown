@@ -14,26 +14,28 @@
 ### 1. Crear proyecto
 
 > ng new _nombre-proyecto_
+> 
 > npm install
+> 
 > ng serve
 
 ### 2. Importar librerias
 
 - #### Angular
 
-> ng add @angular/material
+`ng add @angular/material`
 
 - #### Lodash
 
-> npm i --save-dev @types/lodash
+`npm i --save-dev @types/lodash`
 
 - #### Bootstrap
 
-> npm install bootstrap@3
+`npm install bootstrap@3`
 
 - #### Json Server
 
-> npm i json-server
+`npm i json-server`
 
 ### 3. Crear Material Module
 
