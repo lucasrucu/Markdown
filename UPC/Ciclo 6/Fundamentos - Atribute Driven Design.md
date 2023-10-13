@@ -1,3 +1,7 @@
+---
+tags:
+  - arquitecture
+---
 # ADD - Arquitectura de Diseño Detallado
 
 ## Indice

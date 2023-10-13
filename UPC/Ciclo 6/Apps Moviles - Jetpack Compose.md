@@ -1,3 +1,9 @@
+---
+tags:
+  - mobile
+  - code
+  - flutter
+---
 # Configuración de Applicaciones Móviles con Jetpack Compose
 
 ## Indice
