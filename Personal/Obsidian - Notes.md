@@ -63,16 +63,16 @@ Output:
 <table border="1" style="border-color: red">
  <tr>
   <td rowspan="2">&nbsp;This is a merged cell</td>
-  <td width="200px">&nbsp;This is a cell</td>  
-  <td style="padding: 20px; color: red">&nbsp;This is a cell</td>
+  <td width="200px">&nbsp;This is a cell with width</td>  
+  <td style="padding: 20px; color: red">&nbsp;This is a cell with padding</td>
  </tr>
  <tr>
-  <td height="50px">&nbsp;This is a cell</td>
+  <td height="80px">&nbsp;This is a cell with height</td>
   <td>&nbsp;This is a cell</td>
  </tr>
  <tr>
   <td>&nbsp;This is a cell</td>
-  <td colspan="2" style="padding: 10px; border: 1px solid blue;">&nbsp;This is a merged cell</td>
+  <td colspan="2" style="padding: 10px; border: 1px solid blue;">&nbsp;This is a merged blue cell</td>
  </tr>
 </table>
 
