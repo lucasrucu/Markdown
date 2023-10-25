@@ -36,6 +36,23 @@ You can use html in order to make custom tables, insert images too, and give the
 <p style="color: Red">Hello</p>
 
 <img src="../Assets/Images/db_architecture.mapper.png" width="100px">
+
+<table>
+ <tr>
+  <td rowspan="2">&nbsp;</td>
+  <td>&nbsp;</td>  
+  <td>&nbsp;</td>
+ </tr>
+ <tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+ </tr>
+ <tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+ </tr>
+</table>
 ```
 
 Output:
@@ -43,3 +60,19 @@ Output:
 <img src="../Assets/Images/db_architecture.mapper.png" width="100px">
 
 > En este caso la imagen no se muestra en obsidian, pero en Github se puede visualizar con los estilos que le pongas a la imagen.
+
+<table>
+ <tr>
+  <td rowspan="2">&nbsp;This is a merged cell</td>
+  <td>&nbsp;This is a cell</td>  
+  <td>&nbsp;This is a cell</td>
+ </tr>
+ <tr>
+  <td>&nbsp;This is a cell</td>
+  <td>&nbsp;This is a cell</td>
+ </tr>
+ <tr>
+  <td>&nbsp;This is a cell</td>
+  <td colspan="2">&nbsp;This is a merged cell</td>
+ </tr>
+</table>
