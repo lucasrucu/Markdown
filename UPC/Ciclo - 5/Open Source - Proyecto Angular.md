@@ -19,23 +19,37 @@
 > 
 > ng serve
 
+En el `app.component.html` donde se encuentra el codigo principal, reemplaza to el codigo con la siguiente linea:
+
+```html
+<router-outlet></router-outlet>
+```
+
 ### 2. Importar librerias
 
 - #### Angular
 
-`ng add @angular/material`
+```
+ng add @angular/material
+```
 
 - #### Lodash
 
-`npm i --save-dev @types/lodash`
+```
+npm i --save-dev @types/lodash
+```
 
 - #### Bootstrap
 
-`npm install bootstrap@3`
+```
+npm install bootstrap@3
+```
 
 - #### Json Server
 
-`npm i json-server`
+```
+npm i json-server
+```
 
 ### 3. Crear Material Module
 

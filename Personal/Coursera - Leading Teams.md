@@ -67,4 +67,4 @@ How to overcome these obstacles?
 - I have seen throughout the videos that in teams, depending on the one you form part of, you start to grow around a set of norms, or rules you follow. That being the case, whenever a team is being changed from one type of team to another, in most cases those norms do not apply and you are, per say, starting from zero. And these switches do not always have the same impact as switching from A to B as B to A, one normally has a greater impact. Concluding that if you change your teams modality, you risk the performance of the team to go down.
 - Positive reinforcement is key.
 
-[Source]([_0df54f177f7713490d8805a2fe6086fe_LeadingTeams_unit2_DeRue.pdf (d3c33hcgiwev3.cloudfront.net)](https://d3c33hcgiwev3.cloudfront.net/_0df54f177f7713490d8805a2fe6086fe_LeadingTeams_unit2_DeRue.pdf?Expires=1697328000&Signature=ZHnjYjsU9MvApz1MPc6jBLe7E7EVZXJ0IoP7mHCuNlANMXiXY6ZORbGE5nOGu~V6H6iy0VIm3EWx8yDw3eDeK3zGA2fN6AGodULD7260hJsSaRR9Angtc302YIBQO0tfmt1jCJ7sEriAMvBAzGGyVWR2qpJ5zL5SJbIOMV602Pw_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A))
+[Source]()
