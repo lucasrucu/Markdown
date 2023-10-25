@@ -75,3 +75,5 @@ Output:
   <td colspan="2" style="padding: 10px; border: 1px solid blue;">&nbsp;This is a merged cell</td>
  </tr>
 </table>
+
+> La configuración de los estilos para la tabla, el color, padding, solo se puede visualizar en obsidian, en Github no se ve.
