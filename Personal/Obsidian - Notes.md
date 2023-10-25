@@ -37,20 +37,19 @@ You can use html in order to make custom tables, insert images too, and give the
 
 <img src="../Assets/Images/db_architecture.mapper.png" width="100px">
 
-<table>
+<table border="1">
  <tr>
-  <td rowspan="2">&nbsp;</td>
-  <td>&nbsp;</td>  
-  <td>&nbsp;</td>
+  <td rowspan="2">&nbsp;This is a merged cell</td>
+  <td width="200px">&nbsp;This is a cell</td>  
+  <td>&nbsp;This is a cell</td>
  </tr>
  <tr>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
+  <td height="50px">&nbsp;This is a cell</td>
+  <td>&nbsp;This is a cell</td>
  </tr>
  <tr>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
+  <td>&nbsp;This is a cell</td>
+  <td colspan="2">&nbsp;This is a merged cell</td>
  </tr>
 </table>
 ```
@@ -61,18 +60,18 @@ Output:
 
 > En este caso la imagen no se muestra en obsidian, pero en Github se puede visualizar con los estilos que le pongas a la imagen.
 
-<table bordercolor="#ff00ff">
+<table border="1" style="border-color: red">
  <tr>
   <td rowspan="2">&nbsp;This is a merged cell</td>
-  <td>&nbsp;This is a cell</td>  
+  <td width="200px">&nbsp;This is a cell</td>  
+  <td style="padding: 20px; color: red">&nbsp;This is a cell</td>
+ </tr>
+ <tr>
+  <td height="50px">&nbsp;This is a cell</td>
   <td>&nbsp;This is a cell</td>
  </tr>
  <tr>
   <td>&nbsp;This is a cell</td>
-  <td>&nbsp;This is a cell</td>
- </tr>
- <tr>
-  <td>&nbsp;This is a cell</td>
-  <td colspan="2">&nbsp;This is a merged cell</td>
+  <td colspan="2" style="padding: 10px; border: 1px solid blue;">&nbsp;This is a merged cell</td>
  </tr>
 </table>
