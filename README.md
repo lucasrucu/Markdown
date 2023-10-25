@@ -27,7 +27,3 @@ Feel free to explore and navigate through the directories to find the specific c
 This repository is open-source under the [MIT License](LICENSE). You are free to use and modify the content as long as you provide appropriate attribution.
 
 Happy note-taking and learning!
-
-```
-this is a test to see if i can commit from obsidian
-```
