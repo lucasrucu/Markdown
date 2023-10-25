@@ -17,7 +17,7 @@ The result should look like this
 To reference an image that exists in the vault, you can use the same link format but add a *!*.
 
 ```markdown
-![Image](/Assets/Images/db_architecture.mapper.png)
+[Image](../Assets/Images/db_architecture.mapper.png)
 ```
 
 ![Image](/Assets/Images/db_architecture.mapper.png)
@@ -39,4 +39,5 @@ You can use html in order to make custom tables, insert images too, and give the
 Output:
 
 <p style="color: Red">Hello</p>
-<img src="">
+
+<img src="../Assets/Images/db_architecture.mapper.png" width="100px">
