@@ -61,7 +61,7 @@ Output:
 
 > En este caso la imagen no se muestra en obsidian, pero en Github se puede visualizar con los estilos que le pongas a la imagen.
 
-<table>
+<table bordercolor="#ff00ff">
  <tr>
   <td rowspan="2">&nbsp;This is a merged cell</td>
   <td>&nbsp;This is a cell</td>  
