@@ -34,10 +34,12 @@ You can use html in order to make custom tables, insert images too, and give the
 
 ```html
 <p style="color: Red">Hello</p>
+
+<img src="../Assets/Images/db_architecture.mapper.png" width="100px">
 ```
 
 Output:
-
 <p style="color: Red">Hello</p>
-
 <img src="../Assets/Images/db_architecture.mapper.png" width="100px">
+
+> En este caso la imagen no se muestra en obsidian, pero en Github se puede visualizar con los estilos que le pongas a la imagen.
