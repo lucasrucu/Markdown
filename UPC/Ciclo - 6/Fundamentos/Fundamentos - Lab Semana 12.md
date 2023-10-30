@@ -35,7 +35,13 @@ Seguir los siguientes pasos después:
 	1. Choose template: MySQL
 	2. Attributes: leave default
 	3. JDBC Driver: leave default
-	4. Connection: 
+	4. Connection:
+	   - Connection URL: termina en el nombre de tu DB
+	   - Username: root
+	   - Password: 12345678
+	5. Probar la conexión y finalizar.
+11. 
+
 
 ---
 ## Notas
