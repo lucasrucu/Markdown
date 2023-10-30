@@ -18,13 +18,24 @@ Seguir los siguientes pasos después:
    La carpeta de mysql debe seguir la misma estructura como el resto, la carpeta main, y dentro los dos archivos
 5. Levanta el servidor, Wildfly, de nuevo
 6. Ingresar de nuevo al apartado `JDBC Drivers`, y agregue un driver con las siguientes características:
+
 > Driver name: mysql
 > Driver Module Name: com.mysql
 > Driver class name: com.mysql.cj.jdbc.Driver
 > Driver XA Datasource class name: com.mysql.cj.jdbc.MysqlXADataSource
+
+
 7. Ahora en la maquina se  deberá configurar y conectar el DB
 8. Entrar a Workbench e ingresar a la conexión local.
+
 > Password: 12345678
+
+9. Ahora de regreso en el Wildfly, ingresamos en ves de JDBC Drivers, ingresamos a `Datasource`
+10. Agregar un Datasource normal
+	1. Choose template: MySQL
+	2. Attributes: leave default
+	3. JDBC Driver: leave default
+	4. Connection: 
 
 ---
 ## Notas
