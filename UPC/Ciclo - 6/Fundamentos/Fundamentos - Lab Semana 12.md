@@ -2,7 +2,9 @@
 
 ## Objetivo
 
-Configurar
+Conectar las aplicaciones de Wildfly a una base de datos mysql.
+
+## Configuración
 
 Empieza ejecutando Wildfly, seguir los pasos [aquí](Fundamentos%20-%20Wildfly.md).
 Seguir los siguientes pasos después:
