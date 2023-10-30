@@ -22,3 +22,4 @@ Seguir los siguientes pasos después:
 - ha = high availability
 - Para convertir objetos (de la app) hacia registros (del DB), se usa una capa de persistencia
 - Persistencia = todo lo que uno hace para que la data no se pierda (Driver BD, OLEDB, JDBC, ODBC, XA)
+- Driver, es un programa, la capa de persistencia, convierte objetos a registros y registros a objetos. El driver permite conectar a todos los DB de un tipo (i.e. mysql)
