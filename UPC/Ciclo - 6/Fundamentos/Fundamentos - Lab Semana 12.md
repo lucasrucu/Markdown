@@ -13,15 +13,16 @@ Seguir los siguientes pasos después:
 2. Datasource & Drivers > JDBC Drivers
    Se deberían encontrar 2 drivers, h2 & oracle
 3. Ingresar a la carpeta de Wildfly, ingrese a: modules > system > layers > base > com
-   Aqui se encuentran los drivers para distintas DB. En esta caso si ingresan a uno pueden encontrar la carpet de main, y dos archivo, un xml y jar.
+   Aqui se encuentran los drivers para distintas DB. En esta caso si ingresan a uno pueden encontrar la carpet de main, y dos archivo, un xml y jar
 4. Copiar driver de mysql a la carpeta `com`
-   La carpeta de mysql sigue la misma estructura como el del resto
+   La carpeta de mysql debe seguir la misma estructura como el resto, la carpeta main, y dentro los dos archivos
 5. Levanta el servidor, Wildfly, de nuevo
 6. Ingresar de nuevo al apartado `JDBC Drivers`, y agregue un driver con las siguientes características:
 > Driver name: mysql
 > Driver Module Name: com.mysql
 > Driver class name: com.mysql.cj.jdbc.Driver
 > Driver XA Datasource Clas...: com.mysql.cj.jdbc.MysqlXADataSource
+7. 
 
 ---
 ## Notas
