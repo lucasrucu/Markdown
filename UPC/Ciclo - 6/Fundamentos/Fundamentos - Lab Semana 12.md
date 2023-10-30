@@ -12,6 +12,8 @@ Seguir los siguientes pasos después:
 1. Configuration > Profiles > ha
 2. Datasource & Drivers > JDBC Drivers
    Se deberían encontrar 2 drivers, h2 & oracle
+3. Ingresar a la carpeta de Wildfly, ingrese a: modules > system > layers > base > com
+   Aqui se encuentran los drivers para distintas DB. En esta caso si ingresan a uno pueden encontrar la carpet de main, y dos archivo, un xml y jar.
 
 ---
 ## Notas
