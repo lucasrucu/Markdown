@@ -9,7 +9,8 @@ Conectar las aplicaciones de Wildfly a una base de datos mysql.
 Empieza ejecutando Wildfly, seguir los pasos [aquí](Fundamentos%20-%20Wildfly.md).
 Seguir los siguientes pasos después:
 
-1. Configuration > Profiles > ha 
+1. Configuration > Profiles > ha
+2. Datasource & Drivers
 
 ---
 ## Notas
