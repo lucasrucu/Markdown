@@ -40,7 +40,8 @@ Seguir los siguientes pasos después:
 	   - Username: root
 	   - Password: 12345678
 	5. Probar la conexión y finalizar.
-11. 
+11. Ingresar a Eclipse *Neon* y crear un nuevo proyecto
+12. File > New Project > Web > Dynamic Web Project
 
 
 ---
