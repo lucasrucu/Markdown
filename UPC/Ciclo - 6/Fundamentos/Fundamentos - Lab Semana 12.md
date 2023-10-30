@@ -49,7 +49,7 @@ Seguir los siguientes pasos después:
 17. Ya vole 🛫
 18. Se creo un war (aplicación) y se deberá desplegar en Wildfly
 19. Se ingresa a repositorios y se sube el archivo
-20. Y de debe desplegar en los dos servidores que tenemos
+	1. Y de debe desplegar en los dos servidores que tenemos
 
 ---
 ## Notas
