@@ -10,7 +10,8 @@ Empieza ejecutando Wildfly, seguir los pasos [aquí](Fundamentos%20-%20Wildfly.m
 Seguir los siguientes pasos después:
 
 1. Configuration > Profiles > ha
-2. Datasource & Drivers
+2. Datasource & Drivers > JDBC Drivers
+   Se deberían encontrar 2 drivers, h2 & oracle
 
 ---
 ## Notas
