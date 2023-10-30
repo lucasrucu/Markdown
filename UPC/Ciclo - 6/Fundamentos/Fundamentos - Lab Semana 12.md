@@ -16,7 +16,7 @@ Seguir los siguientes pasos después:
    Aqui se encuentran los drivers para distintas DB. En esta caso si ingresan a uno pueden encontrar la carpet de main, y dos archivo, un xml y jar.
 4. Copiar driver de mysql a la carpeta `com`
    La carpeta de mysql sigue la misma estructura como el del resto
-5. 
+5. Levanta el servidor, Wildfly, de nuevo
 
 ---
 ## Notas
