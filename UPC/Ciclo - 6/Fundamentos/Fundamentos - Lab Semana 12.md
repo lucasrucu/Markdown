@@ -22,7 +22,7 @@ Seguir los siguientes pasos después:
 > Driver Module Name: com.mysql
 > Driver class name: com.mysql.cj.jdbc.Driver
 > Driver XA Datasource Clas...: com.mysql.cj.jdbc.MysqlXADataSource
-7. 
+7. Ahora en la maquina se  deberá configurar y conectar el DB
 
 ---
 ## Notas
