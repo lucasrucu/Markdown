@@ -21,8 +21,10 @@ Seguir los siguientes pasos después:
 > Driver name: mysql
 > Driver Module Name: com.mysql
 > Driver class name: com.mysql.cj.jdbc.Driver
-> Driver XA Datasource Clas...: com.mysql.cj.jdbc.MysqlXADataSource
+> Driver XA Datasource class name: com.mysql.cj.jdbc.MysqlXADataSource
 7. Ahora en la maquina se  deberá configurar y conectar el DB
+8. Entrar a Workbench e ingresar a la conexión local.
+> Password: 12345678
 
 ---
 ## Notas
