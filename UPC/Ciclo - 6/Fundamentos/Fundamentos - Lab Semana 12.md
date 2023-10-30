@@ -42,6 +42,9 @@ Seguir los siguientes pasos después:
 	5. Probar la conexión y finalizar.
 11. Ingresar a Eclipse *Neon* y crear un nuevo proyecto
 12. File > New Project > Web > Dynamic Web Project
+13. Pasos de la configuración que no me acuerdo...
+14. Convertir el proyecto para usar maven
+15. Agregar las dependencias que paso el profesor
 
 
 ---
