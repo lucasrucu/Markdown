@@ -20,6 +20,5 @@ Si la empresa de transportes “El Rapidito SAC” paga S/. 8.00 como dividendo,
 
 $$
 P_0=\frac{8.00*(1+5\%)}{(10\%-5\%)}
-
-P_0=168.00
+\cdot P_0=168.00
 $$
