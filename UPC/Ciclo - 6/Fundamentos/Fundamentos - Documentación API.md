@@ -1,3 +1,8 @@
+---
+tags:
+  - documentation
+  - arquitecture
+---
 # Documentación de un API
 
 - Que tipo de operacion es: get, post, put, delete
