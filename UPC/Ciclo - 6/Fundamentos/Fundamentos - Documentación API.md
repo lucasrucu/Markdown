@@ -13,3 +13,9 @@ tags:
 - Cual es la respuesta que devuelve el API, sea una respuesta exitosa o fallida
 
 Ejemplo de la documentación de un API: [API DEC5 DOCS](https://5qa.dec.com.pe/api/v1/docs#api-Auth-01Login)
+
+### Otras documentaciones
+
+Documentación de arquitectura:
+
+![Diagrama de arquitectura pdf](../../../Assets/Documents/Ejemplos%20Diagramas%20de%20arquitectura.pdf)
