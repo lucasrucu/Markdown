@@ -35,3 +35,9 @@
 ```
 
 ```
+
+## Export
+
+1. Click derecho
+2. Export
+3. War
