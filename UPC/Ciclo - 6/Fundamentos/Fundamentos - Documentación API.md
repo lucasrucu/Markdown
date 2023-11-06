@@ -19,3 +19,5 @@ Ejemplo de la documentación de un API: [API DEC5 DOCS](https://5qa.dec.com.pe/a
 Documentación de arquitectura:
 
 ![Diagrama de arquitectura pdf](../../../Assets/Documents/Ejemplos%20Diagramas%20de%20arquitectura.pdf)
+
+Para C4 se usa archivos con extension dsl, existe en Visual Studio Code una extensión para visualizar el diagrama en vivo. Online existe la página de Structurizr donde puedes compilar diagramas y tambien existe la página [Visual Paradigm](https://www.visual-paradigm.com/)
