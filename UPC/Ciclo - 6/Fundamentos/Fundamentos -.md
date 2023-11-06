@@ -21,8 +21,17 @@
 1. Click derecho en el archivo pom
 2. Escoger editar como texto
 3. Agregar las dependencias
-## Nose
+## ???
 
 1. Crear paquetes
 2. Nombre: api, api.domain, api.service
-3. 
+
+## API Domain
+
+1. Click derecho
+2. Crear una clase nueva
+3. Nombre: consulta
+4. Codigo:
+```
+
+```
