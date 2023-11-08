@@ -23,7 +23,8 @@
 3. Agregar las dependencias
 
 ```xml
-<dependency>
+<dependencies>
+	  <dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
@@ -36,6 +37,7 @@
 			<version>2.2.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
+  </dependencies>
 ```
 
 ## ???
