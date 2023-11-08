@@ -3,7 +3,7 @@
 ## Setup Spring Boot project
 ### Create the project
 
-[initlzr](https://start.spring.io/#!type=gradle-project&language=java&platformVersion=3.1.5&packaging=jar&jvmVersion=1.8&groupId=upc.edu&artifactId=consultas&name=consultas&description=Demo%20project%20for%20Spring%20Boot&packageName=upc.edu.consultas&dependencies=web)
+[initlzr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.1.5&packaging=jar&jvmVersion=1.8&groupId=upc.edu&artifactId=consultas&name=consultas&description=Demo%20project%20for%20Spring%20Boot&packageName=upc.edu.consultas&dependencies=web)
 
 ### Add `Swagger` 
 
