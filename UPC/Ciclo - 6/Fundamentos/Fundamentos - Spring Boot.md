@@ -63,13 +63,13 @@ public class ConsultaResponse {
 	public String desde;
 	public String hasta;
 }
-
+```
 
 ## ApiRest `controller`
 
 Create `controller` package and `ConsultaController.java`
 
-java
+```java
 @RestController
 @RequestMapping("/api/v1/consultas")
 public class ConsultaController {
