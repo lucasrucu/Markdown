@@ -23,4 +23,24 @@ The central repo holds two main branches with an infinite lifetime:
 
 ### Commits
 
-Every commit made uses a prefix term 
+Every commit made uses a prefix term to indicate the purpose of the commit. This is a good practice to follow as it allows for easy filtering of commits when looking through the history.
+
+- feat: a new feature
+- fix: a bug fix
+- docs: changes to documentation
+- style: formatting, missing semi colons, etc; no code change
+- refactor: refactoring production code
+- test: adding tests, refactoring test; no production code change
+- chore: updating build tasks, package manager configs, etc; no production code change
+- perf: a code change that improves performance
+- revert: reverting a previous commit
+- merge: merging branches
+- ci: changes to CI configuration files and scripts
+- build: changes to build process
+- temp: temporary commit that won't be included in your CHANGELOG
+- wip: work in progress commit that will be included in your CHANGELOG
+- release: version bump commit that will be included in your CHANGELOG
+- workflow: changes to workflow files and scripts
+- deps: bumping dependencies
+- config: changes to configuration files
+- breaking: introducing breaking changes
