@@ -14,6 +14,4 @@ Es muy importante la primera presentación
 
 Espera a tomar tus decisiones cuando pase la etapa de emoción, tomate tu tiempo
 
-Negociación: entre dos a mas personas, se decide llegar a un acuerdo que pueda ayudar a ambas/todas partes. no puedes tomar decisiones cuando hay mucha emocion, no tomar decisiones cuando no estas interesado (aprende a decir no)
-
-Confilcto: 
+Negociación: entre dos a mas personas, se decide llegar a un acuerdo que pueda ayudar a ambas/todas partes. no puedes tomar decisiones cuando hay mucha emoción, no tomar decisiones cuando no estas interesado (aprende a decir no)

@@ -20,7 +20,7 @@ To reference an image that exists in the vault, you can use the same link format
 [Image](../Assets/Images/db_architecture.mapper.png)
 ```
 
-![Image](/Assets/Images/db_architecture.mapper.png)
+![Image](/Assets/Images/db_architecture.png)
 
 ### Formulas
 
