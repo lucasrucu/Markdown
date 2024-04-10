@@ -6,7 +6,7 @@ tags:
   - flutter
   - mobile
 ---
-Usando una arquitectura para una aplicación mas grande que solo las apps demo que realizamos dentro nuestra clase donde usamos [[Apps Moviles - Flutter]].
+Usando una arquitectura para una aplicación mas grande que solo las apps demo que realizamos dentro nuestra clase donde usamos [[../UPC/Ciclo - 6/Apps Moviles/Apps Moviles - Flutter]].
 
 # Indice
 
