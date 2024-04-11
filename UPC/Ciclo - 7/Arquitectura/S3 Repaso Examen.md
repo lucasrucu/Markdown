@@ -62,3 +62,8 @@ Cuando todos los eventos están representados, los participantes pueden comenzar
 
 #### Step 10: Bounded Contexts
 Cada bounded context debe tener su respectivo event storming. Estos grupos se forman a partir de políticas o porque están estrechamente relacionados.
+
+### Quality Atribute Escenario
+
+![](../../../Assets/Images/Pasted%20image%2020240409204647.png)
+
