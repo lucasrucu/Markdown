@@ -89,5 +89,36 @@ return (firstChar == lastChar) && isPalindrome(mid);
 ### Crear Test
 
 - Click derecho a la clase
-- Escoger `New ` y despues `JUnit Test`
+- Escoger `New` y despues `JUnit Test`
 - No cambiar nada y presionar finish
+
+### Agregar Jacoco
+
+Jacoco se utiliza para poder mostrar los test units en una interfaz html con mayor calidad.
+
+``` xml
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<version>0.8.11</version>
+<executions>
+<execution>
+<goals>
+<goal>prepare-agent</goal>
+</goals>
+</execution>
+<execution>
+<id>report</id>
+<phase>prepare-package</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+```
+
+Despues depegar el codigo puedes hacer clik derecho en el archivo POM, presionar `Source` y despues `Format`. Esto carga la nueva dependencia y depaso tambien formatea el codigo.
+Para caso seguro, realiza un click derecho en el proyecto, y despues en `Run As` y por ultimo en `7 Maven Install`.
+ 
+> No es necesario para la prueba.
