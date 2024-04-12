@@ -1,3 +1,8 @@
+---
+tags:
+  - "#arquitecture"
+  - qas
+---
 Artefacto: componentes que recibe estimulo
 Componentes: un modulo intercambiable (un modulo es uno o un conjunto de clases)
 
@@ -11,6 +16,16 @@ Ejemplos: El usuario podrá consultar el catalogo de productos del sistema, en u
 	Entorno: operación normal
 	Respuesta: resultado de la consulta
 	Medida: T<=3s
+
+|Atributo|Fuente|Estimulo|Artefacto|Entorno|Respuesta|Medida|
+|:----|:----|:----|:----|:----|:----|:----|
+|Fiabilidad|Viajero|Entrar a la plataforma web en cualquier hora del día|Frontend|Plataforma web accedida por el usuario a cualquier hora del día|Logra cargarse el portal web en el dispositivo del usuario a cualquier hora del día|Numero de visitas registradas a cualquier hora del día|
+|Usabilidad|Viajero|Reserva un paquete de viaje en menos de 10 minutos|Frontend y backend|Servidores Frontend y backend procesando el proceso de reserva de paquetes de viaje|Logran realizar la reserva|Tiempo en realizar la reserva desde que el usuario ingresa a la pagina|
+|Rendimiento|Agencia de viaje|Solicitud de procesar transacciones de pagos de paquetes de viaje|Frontend y backend|Carga de 500 transacciones de pagos de paquetes de viaje, sin tiempos de espera para los usuarios o menor a 1 segundo|Logra procesarse con satisfacción las transacciones de pagos de paquetes de viaje|Número de solicitudes de pagos de viaje no mayores a 500 transacciones por hora|
+|Seguridad|Usuarios|Solicitud de autenticación y autorización menor a 2 segundos|Backend|Servidores backend procesando la autenticación y autorización|Logran autenticarse y autorizar a los usuarios|Tiempo de respuesta de la solicitud en los servidores|
+
+
+![](../../../Assets/Images/Pasted%20image%2020240412180555.png)
 
 Raje del sistema de seguridad del gobierno
 - Caso donde INDECOPI fue hackeado
