@@ -1,1 +1,3 @@
-![](../../../Assets/Documents/upc-pre-202401-si572-pc1-file_v1.pdf)
+![](../../../Assets/Documents/Iot%20PC1%20Solucion.pdf)
+
+![](../../../Assets/Documents/IoT%20EA%20Solucion.pdf)
