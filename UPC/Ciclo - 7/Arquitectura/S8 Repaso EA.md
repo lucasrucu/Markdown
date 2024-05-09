@@ -61,3 +61,5 @@ Pregunta 2: diagrama de contenedores
 
 Pregunta 3: diagrama de classes UML
 ![](../../../Assets/Images/Pasted%20image%2020240509001504.png)
+Pregunta 4:
+![](../../../Assets/Images/Pasted%20image%2020240509103224.png)
