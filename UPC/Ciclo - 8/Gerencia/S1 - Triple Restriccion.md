@@ -1,4 +1,4 @@
-e q# Teoria
+# Teoria
 Las principales restricciones son:
 - Alcance
 - Costo
@@ -23,11 +23,12 @@ Bajo estas restricciones también se debe asegurar:
 	- inicio
 	- planificación
 	- ejecución
-	- control y monitoreo
+	- control y monitoreo / seguimiento y control
 	- cierre
 
 # Vocabulario
 - PMO (Project Management Office): es quien te da la guías y estándares de como se debe llegar a cumplir los objetivos de cada proyecto
+- PMP: project management profesional
 - PM (Project Manager: responsable de satisfacer tareas, equipos e individuales.
 
 # Todo - Tareas
@@ -42,7 +43,7 @@ Bajo estas restricciones también se debe asegurar:
 	- buscar los 3 o 4 puertos que reciben los buques grandes (eeuu, brazil, chile?)
 	- no en cualquier puerto se puede desembarcar este buque
 
-El buque mas grande del mundo cuenta con una capacidad de 24,000 TEU.
+El buque mas grande del mundo cuenta con una capacidad de 24,000 TEU (unidad de 20 pies).
 18,000 contenedores
 Los puertos mas grandes de america que pueden recibir estos buques son
 - El **puerto** de Nueva York y Nueva Jersey (Newark)
