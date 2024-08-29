@@ -11,7 +11,7 @@ tags:
 
 # Durante clase
 ## Notas
-## Vocabulario
+## Glosario
 
 # Después de clase
 ## Tarea 1: 

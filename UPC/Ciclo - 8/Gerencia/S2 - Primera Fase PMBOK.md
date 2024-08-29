@@ -17,7 +17,6 @@ tags:
 - Hay dos procesos en el inicio, son:
 	- Integración: acta de constitución del proyecto (autoriza inicio del proyecto)
 	- Interesados: identificar a los interesados
-	- En la fase de planificación hay XX procesos
 - Hay 24 procesos en la planificación
 	- Planificar la gestion del alcance 
 	- Recopilar requisitos: hace uso de una herramienta (plantilla) que es: matriz de trazabilidad de requisitos

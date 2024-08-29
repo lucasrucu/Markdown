@@ -1,3 +1,8 @@
+---
+tags:
+  - administration
+  - pmbok
+---
 # Teoria
 Las principales restricciones son:
 - Alcance
