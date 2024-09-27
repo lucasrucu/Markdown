@@ -4,7 +4,6 @@
   Se agregan las 5 fases que vimos en clases?
   Las 
 - Que plantilla debemos usar, azul o roja?
-## Tareas
 
 <hr>
 # S4
