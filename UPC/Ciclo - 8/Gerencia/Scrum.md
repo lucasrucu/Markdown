@@ -19,10 +19,20 @@ Están divididos en iteraciones que se llaman **Sprint**. Se recomienda que los 
   Dura de 2 a 4 hora.
   Se marca el objetivo del sprint y las historias de usuario que se aceptaran para el sprint. El equipo indica las historias de usuario que se pueden realizar en base al velocity (el tiempo que les demora realizar un user story) de cada [User Story](User%20Story.md).
 - Daily Scrum:
-  Un evento de máximo 15 minutos.
+  Un evento de máximo 15 minutos, se hace a diario, normalmente en la mañana a primera hora.
   Tiene como objetivo ver cuales son los impedimento que impiden cumplir con los objetivos.
   No esta diseñado para dar un estado, no se actualizan el estado en que tareas se encuentren.
   Recomendado, estar parados, en un círculo, mirándose las caras.
+- Sprint Review:
+  Se hace al final del sprint, ultimo dia.
+  La ceremonia se lidera por el PO.
+  Se revisan las tareas asignadas y comprometidas por el equipo para culminar el sprint. Se revisa si se cumplió con el objetivo del sprint, si hay cosas que falta.
+  Mostrar el trabajo hecho, mejorar la comunicación con el usuario, mejorar participación del usuario y recibir feedback del usuario.
+- Sprint Retrospective
+  Tambien se realiza al final de un Sprint.
+  Se miran que cosas les fueron bien, que cosas mal, y que se puede mejorar para el siguiente sprint.
+  El review revisa funcionalidades del producto, mientras que el retrospective revisa actividades y funciones del equipo.
+  Tienen el objetivo para que cada sprint sea mas eficiente.
 ### Elementos
 Existen distintos tipos de herramientas de que usan dentro Scrum.
 El mas importante son las [User Story](User%20Story.md).
