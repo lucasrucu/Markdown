@@ -1,0 +1,1 @@
+Business Case es un **documento** que te dice lo que tienes que hacer. Una hoja de ruta.
