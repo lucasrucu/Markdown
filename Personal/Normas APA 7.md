@@ -32,6 +32,9 @@ Cualquier grupo u organizacion que use siglas se debera citar de la siguiente fo
 ![](../Assets/Images/Pasted%20image%2020240927142100.png)
 ### Figuras
 ![](../Assets/Images/Pasted%20image%2020240927142113.png)
+
+En ambos casos para figuras y tablas se usa las siguientes reglas para las notas:
+![](../Assets/Images/Pasted%20image%2020250620124401.png)
 ## Números
 El escribir cifras numéricas también tiene distintas reglas según APA 7. Considerar que esta difieren con algunas reglas de la Real Academia Española (RAE).
 En APA 7 se usan estas reglas:
